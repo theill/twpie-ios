@@ -19,15 +19,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	NSLog(@"Loading tweet %@", [selectedObject valueForKey:@"tweet"]);
+	NSString *tweet = selectedObject;
 	
-	[message setText:[[selectedObject valueForKey:@"tweet"] description]];
+	NSLog(@"Loading tweet %@", tweet);
+	
+	[message setText:tweet];
 	[message becomeFirstResponder];
-
-    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(sendTweet)];
+	
+    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(sendTweet)];
     self.navigationItem.rightBarButtonItem = sendButton;
     [sendButton release];
-	
 }
 
 /*
@@ -77,14 +78,13 @@
 
 
 - (void)sendTweet {
-	[selectedObject setValue:[message text] forKey:@"tweet"];
+	[self setSelectedObject:[message text]];
 	
 	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
 	[engine setClientName:@"web" version:nil URL:nil token:nil];
-	// NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	// [engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
-	[engine setUsername:@"theill" password:@"uvsraCFR"];
-	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
+		
 	NSLog(@"Sending %@ update message to twitter", [message	text]);
 	[engine sendUpdate:[message text]];	
 }
@@ -98,6 +98,8 @@
 
 - (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error {
 	NSLog(@"Failed to send tweet for identifier %@. Got error %@", connectionIdentifier, error);
+	
+	// we might pop up welcome screen here?
 }
 
 - (void)dealloc {

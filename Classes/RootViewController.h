@@ -9,16 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+@interface RootViewController : UIViewController {
 
 @private
-    NSFetchedResultsController *fetchedResultsController_;
-    NSManagedObjectContext *managedObjectContext_;
+	NSMutableArray *tweets;
+	IBOutlet UITableView *messagesTableView;
 }
 
-- (void)editMessage:(NSManagedObject *)obj;
+- (void)editMessage:(NSString *)obj;
+- (void)setupSampleTweets;
 
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, retain) UITableView *messagesTableView;
+@property (nonatomic, retain) NSMutableArray *tweets;
 
 @end

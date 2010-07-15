@@ -11,12 +11,12 @@
 #import "MGTwitterEngine.h"
 
 @interface MessageViewController : UIViewController {
-	NSManagedObject *selectedObject;
+	NSString *selectedObject;
 	MGTwitterEngine *engine;
 
 	IBOutlet UITextView *message;
 }
 
-@property (nonatomic, retain) NSManagedObject *selectedObject;
+@property (nonatomic, retain) NSString *selectedObject;
 
 @end
