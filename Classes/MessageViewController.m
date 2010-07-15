@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	NSLog(@"Loading tweet %@", [selectedObject valueForKey:@"tweet"]);
+	
 	[message setText:[[selectedObject valueForKey:@"tweet"] description]];
 	[message becomeFirstResponder];
 

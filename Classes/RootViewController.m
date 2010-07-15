@@ -86,7 +86,7 @@
     
     // If appropriate, configure the new managed object.
     [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
-	[newManagedObject setValue:@"template" forKey:@"tweet"];
+	[newManagedObject setValue:@"" forKey:@"tweet"];
     
     // Save the context.
     NSError *error = nil;
