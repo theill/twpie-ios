@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 
 
-@interface TweetTemplate : NSObject {
-
+@interface TweetTemplate : NSObject<NSCoding> {
+	NSString *template;
 }
+
+- (id)initWithTemplate:(NSString *)tmpl;
+
+@property(nonatomic, retain) NSString *template;
 
 @end

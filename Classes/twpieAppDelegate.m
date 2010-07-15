@@ -9,7 +9,6 @@
 #import "twpieAppDelegate.h"
 #import "RootViewController.h"
 
-
 @implementation twpieAppDelegate
 
 @synthesize window;
@@ -21,7 +20,20 @@
 
 - (void)awakeFromNib {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	self.tweets = [NSMutableArray arrayWithArray:[defaults arrayForKey:@"tweets"]];
+	
+	NSData *dataRepresentingSavedArray = [defaults objectForKey:@"tweets"];
+	if (dataRepresentingSavedArray != nil) {
+		NSArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
+        if (oldSavedArray != nil) {
+			self.tweets= [[NSMutableArray alloc] initWithArray:oldSavedArray];
+		}
+        else {
+			self.tweets = [[NSMutableArray alloc] init];
+		}
+	}
+	else {
+		self.tweets = [[NSMutableArray alloc] init];
+	}
 	
 	RootViewController *rootViewController = (RootViewController *)[navigationController topViewController];
 	rootViewController.tweets = [self tweets];
@@ -76,7 +88,9 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
 	RootViewController *rootViewController = (RootViewController *)[navigationController topViewController];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:[rootViewController tweets] forKey:@"tweets"];
+	
+	NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:[rootViewController tweets]];
+	[defaults setObject:myEncodedObject forKey:@"tweets"];
 }
 
 

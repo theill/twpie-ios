@@ -9,14 +9,15 @@
 #import <UIKit/UIKit.h>
 
 #import "MGTwitterEngine.h"
+#import "TweetTemplate.h"
 
 @interface MessageViewController : UIViewController {
-	NSString *selectedObject;
+	TweetTemplate *selectedObject;
 	MGTwitterEngine *engine;
 
 	IBOutlet UITextView *message;
 }
 
-@property (nonatomic, retain) NSString *selectedObject;
+@property (nonatomic, retain) TweetTemplate *selectedObject;
 
 @end

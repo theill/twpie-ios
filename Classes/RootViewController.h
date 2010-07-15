@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "TweetTemplate.h"
 
 @interface RootViewController : UIViewController {
 
@@ -16,7 +17,7 @@
 	IBOutlet UITableView *messagesTableView;
 }
 
-- (void)editMessage:(NSString *)obj;
+- (void)editMessage:(TweetTemplate *)obj;
 - (void)setupSampleTweets;
 
 @property (nonatomic, retain) UITableView *messagesTableView;

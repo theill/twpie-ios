@@ -80,8 +80,8 @@
  */
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-	NSString *tweet = [self.tweets objectAtIndex:[indexPath row]];
-	cell.textLabel.text = tweet;
+	TweetTemplate *tweet = [self.tweets objectAtIndex:[indexPath row]];
+	cell.textLabel.text = [tweet template];
 }
 
 
@@ -89,7 +89,7 @@
 #pragma mark Add a new object
 
 - (void)insertNewObject {
-	NSString *tweet = @"tweet";
+	TweetTemplate *tweet = [[TweetTemplate alloc] initWithTemplate:@""];
 	[[self tweets] addObject:tweet];
 	[self editMessage:tweet];
 }
@@ -157,11 +157,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSLog(@"Clicked row at %d", indexPath.row);
 	
-	NSString *tweet = [[self tweets] objectAtIndex:[indexPath row]];
+	TweetTemplate *tweet = [[self tweets] objectAtIndex:[indexPath row]];
 	[self editMessage:tweet];
 }
 
-- (void)editMessage:(NSString *)selectedObject {
+- (void)editMessage:(TweetTemplate *)selectedObject {
 	MessageViewController *messageViewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
 	[messageViewController setSelectedObject:selectedObject];
 	[self.navigationController pushViewController:messageViewController animated:YES];
@@ -179,8 +179,8 @@
 }
 
 - (void)setupSampleTweets {
-	[[self tweets] addObject:@"@having [coffee?]"];
-	[[self tweets] addObject:@"d reporting w [85.4?]"];
+	[[self tweets] addObject:[[TweetTemplate alloc] initWithTemplate:@"@having [coffee?]"]];
+	[[self tweets] addObject:[[TweetTemplate alloc] initWithTemplate:@"d reporting w [85.4?]"]];
 }
 
 
