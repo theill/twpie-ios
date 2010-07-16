@@ -8,15 +8,22 @@
 
 #import "TweetTemplate.h"
 
-
 @implementation TweetTemplate
 
-@synthesize template;
+@synthesize text, usageCount, updatedAt;
 
-- (id)initWithTemplate:(NSString *)tmpl {
-	self.template = tmpl;
+- (id)initWithText:(NSString *)t {
+	self.text = t;
+	self.usageCount = 0;
+	self.updatedAt = [NSDate date];
 
 	return self;
+}
+
+- (void)dealloc {
+	[super dealloc];
+	[text release];
+	[updatedAt release];
 }
 
 #pragma mark -
@@ -24,14 +31,18 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	//Encode properties, other class variables, etc
-    [encoder encodeObject:self.template	forKey:@"template"];
+    [encoder encodeObject:self.text forKey:@"text"];
+    [encoder encodeInt:self.usageCount forKey:@"usage_count"];
+    [encoder encodeObject:self.updatedAt forKey:@"updated_at"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     self = [super init];
     if (self != nil) {
 		//decode properties, other class vars
-        self.template = [decoder decodeObjectForKey:@"template"];
+        self.text = [decoder decodeObjectForKey:@"text"];
+        self.usageCount = [decoder decodeIntForKey:@"usage_count"];
+        self.updatedAt = [decoder decodeObjectForKey:@"updated_at"];
     }
     return self;
 }

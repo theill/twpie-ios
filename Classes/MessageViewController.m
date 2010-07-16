@@ -23,7 +23,7 @@
 	
 	NSLog(@"Loading tweet %@", tweet);
 	
-	[message setText:[tweet template]];
+	[message setText:[tweet text]];
 	[message becomeFirstResponder];
 	
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(sendTweet)];
@@ -78,7 +78,7 @@
 
 
 - (void)sendTweet {
-	[[self selectedObject] setTemplate:[message text]];
+	[[self selectedObject] setText:[message text]];
 	
 	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
 	[engine setClientName:@"web" version:nil URL:nil token:nil];

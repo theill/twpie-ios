@@ -27,6 +27,13 @@
     [super viewDidLoad];
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+#if DEBUG
+	[defaults setBool:TRUE forKey:@"setupcomplete"];
+	[defaults setObject:@"asdf" forKey:@"username"];
+	[defaults setObject:@"asdf" forKey:@"password"];
+#endif
+	
 	if ([defaults boolForKey:@"setupcomplete"] == YES) {
 		NSLog(@"Setup complete, just continue with normal work");
 	}
@@ -81,7 +88,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	TweetTemplate *tweet = [self.tweets objectAtIndex:[indexPath row]];
-	cell.textLabel.text = [tweet template];
+	cell.textLabel.text = [tweet text];
 }
 
 
@@ -89,9 +96,11 @@
 #pragma mark Add a new object
 
 - (void)insertNewObject {
-	TweetTemplate *tweet = [[TweetTemplate alloc] initWithTemplate:@""];
+	TweetTemplate *tweet = [[TweetTemplate alloc] initWithText:@""];
 	[[self tweets] addObject:tweet];
-	[self editMessage:tweet];
+	[tweet release];
+	
+	[self editMessage:[[self tweets] lastObject]];
 }
 
 
@@ -179,8 +188,13 @@
 }
 
 - (void)setupSampleTweets {
-	[[self tweets] addObject:[[TweetTemplate alloc] initWithTemplate:@"@having [coffee?]"]];
-	[[self tweets] addObject:[[TweetTemplate alloc] initWithTemplate:@"d reporting w [85.4?]"]];
+	TweetTemplate *tweet = [[TweetTemplate alloc] initWithText:@"@having [coffee?]"];
+	[[self tweets] addObject:tweet];
+	[tweet release];
+	
+	tweet = [[TweetTemplate alloc] initWithText:@"d reporting w [85.4?]"];
+	[[self tweets] addObject:tweet];
+	[tweet release];
 }
 
 

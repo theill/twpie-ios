@@ -271,7 +271,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
+									<integer>4</integer>
 									<integer>2</integer>
 									<integer>0</integer>
 								</array>
@@ -314,7 +314,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>twpieAppDelegate.m</string>
+								<string>MessageViewController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -322,11 +322,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>twpieAppDelegate.m</string>
+										<string>MessageViewController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>417F7D4C11F060510091993B</string>
+										<string>417F7DD411F0CA5E0091993B</string>
 										<key>history</key>
 										<array>
 											<string>41C5A34211EE4C0B00E634ED</string>
@@ -334,16 +334,19 @@
 											<string>41AA9A8811EF55D40044FA6C</string>
 											<string>41AA9B4C11EF8F530044FA6C</string>
 											<string>41AA9BE511EFA5470044FA6C</string>
-											<string>41AA9D4111EFB6470044FA6C</string>
 											<string>41AA9D4211EFB6470044FA6C</string>
-											<string>41AA9D4511EFB6470044FA6C</string>
 											<string>41AA9D4911EFB6470044FA6C</string>
-											<string>41AA9D4E11EFB6640044FA6C</string>
-											<string>41AA9D5711EFB7BA0044FA6C</string>
-											<string>41AA9D6711EFB8410044FA6C</string>
-											<string>41AA9D7111EFB8C70044FA6C</string>
 											<string>41AA9D7211EFB8C70044FA6C</string>
-											<string>41AA9D9F11EFBF6B0044FA6C</string>
+											<string>417F7D9C11F0C9200091993B</string>
+											<string>417F7D9D11F0C9200091993B</string>
+											<string>417F7D9E11F0C9200091993B</string>
+											<string>417F7D9F11F0C9200091993B</string>
+											<string>417F7DA011F0C9200091993B</string>
+											<string>417F7DA111F0C9200091993B</string>
+											<string>417F7DA211F0C9200091993B</string>
+											<string>417F7DC911F0CA3D0091993B</string>
+											<string>417F7DD311F0CA5E0091993B</string>
+											<string>417F7DCA11F0CA3D0091993B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -541,11 +544,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>417F7D5711F060510091993B</string>
+		<string>417F7DD511F0CA5E0091993B</string>
+		<string>1C530D57069F1CE1000CFCEE</string>
+		<string>417F7DA611F0C9200091993B</string>
 		<string>417F7D5811F060510091993B</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>41C5A31111EE48B200E634ED</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/theill/code/twpie/twpie.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -565,12 +570,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>WelcomeViewController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -781,12 +788,14 @@
 							<key>Dock</key>
 							<array>
 								<dict>
+									<key>BecomeActive</key>
+									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>twpieAppDelegate.h</string>
+										<string>RootViewController.m</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -795,7 +804,7 @@
 										<key>Frame</key>
 										<string>{{0, 0}, {872, 282}}</string>
 										<key>RubberWindowFrame</key>
-										<string>469 338 872 633 0 0 1920 1058 </string>
+										<string>362 314 872 633 0 0 1680 1028 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -807,8 +816,6 @@
 							<string>282pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -821,7 +828,7 @@
 								<key>Frame</key>
 								<string>{{0, 287}, {872, 305}}</string>
 								<key>RubberWindowFrame</key>
-								<string>469 338 872 633 0 0 1920 1058 </string>
+								<string>362 314 872 633 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXProjectFindModule</string>
@@ -844,13 +851,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>41AA9A2311EF4F800044FA6C</string>
-				<string>41AA9A2411EF4F800044FA6C</string>
+				<string>417F7D7611F0C7EF0091993B</string>
+				<string>417F7D7711F0C7EF0091993B</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
 			<key>WindowString</key>
-			<string>469 338 872 633 0 0 1920 1058 </string>
+			<string>362 314 872 633 0 0 1680 1028 </string>
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>
@@ -873,6 +880,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -918,7 +927,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

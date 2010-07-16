@@ -87,6 +87,7 @@ NSString *followersToken;
 		
 		[defaults setBool:TRUE forKey:@"setupcomplete"];
 		[alert show];
+		[alert release];
 		
 //		[self dismissModalViewControllerAnimated:YES];
 		[self.delegate configurationDidChange:self];
@@ -100,6 +101,7 @@ NSString *followersToken;
 //		[saveProgress stopAnimating];
 //		[saveButton setEnabled:YES];
 		[alert show];
+		[alert release];
 	}
 }
 
