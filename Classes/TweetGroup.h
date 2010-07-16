@@ -11,12 +11,13 @@
 
 @interface TweetGroup : NSObject {
 	NSString *name;
-	NSMutableArray *messages;
+	NSMutableDictionary *messages;
 }
 
 - (int)usageCount;
+- (void)addMessage:(NSString *)message;
 
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSMutableArray *messages;
+@property (nonatomic, retain) NSMutableDictionary *messages;
 
 @end

@@ -43,6 +43,9 @@
    @having == (1)
      coffee (1)
  
+ * it must be possible to select both group and message since
+   users might want to send a new message to "d having", etc.
+ 
  = retweets
  
  we do not need to support this
@@ -51,7 +54,7 @@
  
  TweetGroup
    name (NSString with e.g. 'd reporting')
-   messages (NSArray of TweetMessage instances)
+   messages (NSMutableDictionary of TweetMessage instances)
  
  TweetMessage (aka TweetTemplate)
    text (NSString with e.g. 'w 81.3')
@@ -63,13 +66,13 @@
 #import <Foundation/Foundation.h>
 
 @interface TweetTemplate : NSObject<NSCoding> {
-	// template for tweet e.g. "d reporting w [86.1]"
 	NSString *text;
 	int usageCount;
 	NSDate *updatedAt;
 }
 
 - (id)initWithText:(NSString *)t;
+- (void)increase;
 
 @property(nonatomic, retain) NSString *text;
 @property (nonatomic) int usageCount;

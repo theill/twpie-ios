@@ -20,6 +20,11 @@
 	return self;
 }
 
+- (void)increase {
+	self.usageCount++;
+	self.updatedAt = [NSDate date];
+}
+
 - (void)dealloc {
 	[super dealloc];
 	[text release];
