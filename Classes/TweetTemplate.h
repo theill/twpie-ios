@@ -67,14 +67,21 @@
 
 @interface TweetTemplate : NSObject<NSCoding> {
 	NSString *text;
+	NSString *group;
 	int usageCount;
 	NSDate *updatedAt;
 }
 
-- (id)initWithText:(NSString *)t;
+- (id)initWithText:(NSString *)t group:(NSString *)g;
+- (id)initWithTweet:(NSString *)tweet;
 - (void)increase;
+- (NSString *)tweet;
+- (void)setTweet:(NSString *)tweet;
+- (NSString *)extractGroupFrom:(NSString *)tweet;
+- (NSString *)extractTextFrom:(NSString *)tweet;
 
 @property(nonatomic, retain) NSString *text;
+@property(nonatomic, retain) NSString *group;
 @property (nonatomic) int usageCount;
 @property(nonatomic, retain) NSDate *updatedAt;
 

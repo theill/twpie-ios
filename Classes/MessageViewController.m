@@ -23,7 +23,7 @@
 	
 	NSLog(@"Loading tweet %@", tweet);
 	
-	[message setText:[tweet text]];
+	[message setText:[tweet tweet]];
 	[message becomeFirstResponder];
 	
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(sendTweet)];
@@ -91,6 +91,10 @@
 
 - (void)requestSucceeded:(NSString *)connectionIdentifier {
 	NSLog(@"Got back response for identifier %@", connectionIdentifier);
+	
+	// store recently sent tweet
+	TweetTemplate *tweet = selectedObject;
+	[tweet setTweet:[message text]];
 	
 	// pop controller once message has been successfully sent
 	[self.navigationController popViewControllerAnimated:YES];

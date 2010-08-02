@@ -106,7 +106,6 @@ NSString *followersToken;
 }
 
 
-
 #pragma mark -
 #pragma mark Memory management
 
@@ -131,6 +130,4 @@ NSString *followersToken;
 	[engine release];
 }
 
-
 @end
-

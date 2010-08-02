@@ -10,14 +10,22 @@
 
 @implementation TweetTemplate
 
-@synthesize text, usageCount, updatedAt;
+@synthesize text, group, usageCount, updatedAt;
 
-- (id)initWithText:(NSString *)t {
+- (id)initWithText:(NSString *)t group:(NSString *)g {
 	self.text = t;
+	self.group = g;
 	self.usageCount = 0;
 	self.updatedAt = [NSDate date];
 
 	return self;
+}
+
+- (id)initWithTweet:(NSString *)tweet {
+	NSLog(@"Initializing tweet with %@", tweet);
+	NSString *t = @"a";
+	NSString *g = @"b";
+	return [self initWithText:t group:g];
 }
 
 - (void)increase {
@@ -25,9 +33,47 @@
 	self.updatedAt = [NSDate date];
 }
 
+- (NSString *)extractGroupFrom:(NSString *)tweet {
+	NSArray *parts = [tweet componentsSeparatedByString:@" "];
+	if ([parts count] <= 1) {
+		// no group if only one word
+		return @"";
+	}
+	
+	if ([[parts objectAtIndex:0] hasPrefix:@"d"] && [parts count] > 1) {
+		return [NSString stringWithFormat:@"d %@", [parts objectAtIndex:1]];
+	}
+	
+	if ([[parts objectAtIndex:0] hasPrefix:@"@"]) {
+		return [parts objectAtIndex:0];
+	}
+	
+	return @"";
+}
+
+- (NSString *)extractTextFrom:(NSString *)tweet {
+	return [tweet substringToIndex:[[self extractGroupFrom:tweet] length]];
+}
+
+- (NSString *)tweet {
+	if (self.group && [self.group length] > 0) {
+		return [NSString stringWithFormat:@"%@ %@", self.group, self.text];
+	}
+	else {
+		return self.text;
+	}
+}
+
+- (void)setTweet:(NSString *)tweet {
+	self.group = [self extractGroupFrom:tweet];
+	self.text = [self extractTextFrom:tweet];
+}
+
+
 - (void)dealloc {
 	[super dealloc];
 	[text release];
+	[group release];
 	[updatedAt release];
 }
 

@@ -43,8 +43,8 @@ NSInteger usageCountUpdatedSort(id msg1, id msg2, void *context) {
 		[t increase];
 	}
 	else {
-		t = [[TweetTemplate alloc] initWithText:message];
-		[[self messages] valueForKey:message];
+		t = [[TweetTemplate alloc] initWithTweet:message];
+		[[self messages] setObject:t forKey:message];
 		[t release];
 	}
 }
@@ -60,7 +60,7 @@ NSInteger usageCountUpdatedSort(id msg1, id msg2, void *context) {
 	
 	return sortedArray;
 	
-	// FIXME: is 'sortedArray' it autoreleased?
+	// FIXME: is 'sortedArray' autoreleased?
 }
 
 //

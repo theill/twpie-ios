@@ -11,6 +11,7 @@
 @implementation TweetCell
 
 @synthesize template;
+@synthesize groupNameLabel, messageLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {

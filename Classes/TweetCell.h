@@ -11,8 +11,14 @@
 
 @interface TweetCell : UITableViewCell {
 	TweetTemplate *template;
+	
+	IBOutlet UILabel *groupNameLabel;
+	IBOutlet UILabel *messageLabel;
 }
 
 @property (nonatomic, retain) TweetTemplate *template;
+
+@property (nonatomic, retain) IBOutlet UILabel *groupNameLabel;
+@property (nonatomic, retain) IBOutlet UILabel *messageLabel;
 
 @end

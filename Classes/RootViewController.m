@@ -9,9 +9,10 @@
 #import "RootViewController.h"
 #import "MessageViewController.h"
 #import "WelcomeViewController.h"
+#import "TweetCell.h"
 
 @interface RootViewController ()
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(TweetCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 
@@ -30,8 +31,11 @@
 
 #if DEBUG
 	[defaults setBool:TRUE forKey:@"setupcomplete"];
-	[defaults setObject:@"asdf" forKey:@"username"];
-	[defaults setObject:@"asdf" forKey:@"password"];
+	[defaults setObject:@"theilltest" forKey:@"username"];
+	[defaults setObject:@"653976" forKey:@"password"];
+	if ([[self tweets] count] == 0) {
+		[self setupSampleTweets];
+	}
 #endif
 	
 	if ([defaults boolForKey:@"setupcomplete"] == YES) {
@@ -50,9 +54,9 @@
 
 	self.navigationItem.title = @"Messages";
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    [addButton release];
+	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
+	self.navigationItem.rightBarButtonItem = addButton;
+	[addButton release];
 }
 
 
@@ -86,9 +90,22 @@
 }
  */
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(TweetCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	TweetTemplate *tweet = [self.tweets objectAtIndex:[indexPath row]];
-	cell.textLabel.text = [tweet text];
+//	cell.textLabel.text = [tweet text];
+	
+	cell.groupNameLabel.text = [tweet group];
+	cell.messageLabel.text = [tweet text];
+	
+	CGSize sizeToMakeLabel = [cell.groupNameLabel.text sizeWithFont:cell.groupNameLabel.font];
+	cell.groupNameLabel.frame = CGRectMake(cell.groupNameLabel.frame.origin.x + 4,
+										   cell.groupNameLabel.frame.origin.y + 4,
+										   sizeToMakeLabel.width,
+										   sizeToMakeLabel.height);
+	cell.messageLabel.frame = CGRectMake(cell.groupNameLabel.frame.origin.x + cell.groupNameLabel.frame.size.width + 8,
+										  cell.messageLabel.frame.origin.y,
+										  cell.messageLabel.frame.size.width,
+										  cell.messageLabel.frame.size.height);
 }
 
 
@@ -96,7 +113,7 @@
 #pragma mark Add a new object
 
 - (void)insertNewObject {
-	TweetTemplate *tweet = [[TweetTemplate alloc] initWithText:@""];
+	TweetTemplate *tweet = [[TweetTemplate alloc] initWithText:@"" group:@""];
 	[[self tweets] addObject:tweet];
 	[tweet release];
 	
@@ -124,9 +141,15 @@
 	NSLog(@"tableView:cellForRowAtIndexPath:");
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TweetCell *cell = (TweetCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[NSBundle mainBundle] loadNibNamed:@"TweetCell" owner:self options:nil] objectAtIndex:0];
+//		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+		//		UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"updates-bg.png"]];
+		//		[cell setBackgroundView:bgView];
+		
+//        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 	}
 	
 	[self configureCell:cell atIndexPath:indexPath];
@@ -148,15 +171,16 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSLog(@"tableView:commitEditingStyle:");
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		[[self tweets] removeObjectAtIndex:[indexPath row]];
-    }   
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+	}   
 }
 
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // The table view should not be re-orderable.
-    return NO;
+	// The table view should not be re-orderable.
+	return NO;
 }
 
 
@@ -188,11 +212,15 @@
 }
 
 - (void)setupSampleTweets {
-	TweetTemplate *tweet = [[TweetTemplate alloc] initWithText:@"@having [coffee?]"];
+	TweetTemplate *tweet = [[TweetTemplate alloc] initWithText:@"coffee" group:@"@having"];
+	[[self tweets] addObject:tweet];
+	[tweet release];
+
+	tweet = [[TweetTemplate alloc] initWithText:@"a beer" group:@"@having"];
 	[[self tweets] addObject:tweet];
 	[tweet release];
 	
-	tweet = [[TweetTemplate alloc] initWithText:@"d reporting w [85.4?]"];
+	tweet = [[TweetTemplate alloc] initWithText:@"w 85.4" group:@"d reporting"];
 	[[self tweets] addObject:tweet];
 	[tweet release];
 }
@@ -222,4 +250,3 @@
 
 
 @end
-
