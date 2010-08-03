@@ -8,19 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "TweetRepository.h"
 
 @interface twpieAppDelegate : NSObject <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navigationController;
 
 @private
-	NSMutableArray *tweets;
+//	TweetRepository *tweetRepository;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
-
-@property (nonatomic, retain) NSMutableArray *tweets;
 
 - (NSString *)applicationDocumentsDirectory;
 

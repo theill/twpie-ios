@@ -19,6 +19,7 @@
 		417F7D5E11F060BB0091993B /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 417F7D5D11F060BB0091993B /* TweetCell.m */; };
 		417F7D7111F0C7CD0091993B /* TweetGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 417F7D7011F0C7CD0091993B /* TweetGroup.m */; };
 		419257D31206E8A800629AD8 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419257D21206E8A800629AD8 /* TweetCell.xib */; };
+		41925AD2120854CA00629AD8 /* TweetRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 41925AD1120854CA00629AD8 /* TweetRepository.m */; };
 		41AA9AB411EF7C2D0044FA6C /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AA9AB211EF7C2D0044FA6C /* WelcomeViewController.m */; };
 		41AA9AB511EF7C2D0044FA6C /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41AA9AB311EF7C2D0044FA6C /* WelcomeViewController.xib */; };
 		41AA9B1811EF86D00044FA6C /* bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 41AA9B1711EF86D00044FA6C /* bird.png */; };
@@ -57,6 +58,8 @@
 		417F7D6F11F0C7CD0091993B /* TweetGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetGroup.h; sourceTree = "<group>"; };
 		417F7D7011F0C7CD0091993B /* TweetGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetGroup.m; sourceTree = "<group>"; };
 		419257D21206E8A800629AD8 /* TweetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
+		41925AD0120854CA00629AD8 /* TweetRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetRepository.h; sourceTree = "<group>"; };
+		41925AD1120854CA00629AD8 /* TweetRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetRepository.m; sourceTree = "<group>"; };
 		41AA9AB111EF7C2D0044FA6C /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		41AA9AB211EF7C2D0044FA6C /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		41AA9AB311EF7C2D0044FA6C /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WelcomeViewController.xib; path = Classes/WelcomeViewController.xib; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 				417F7D5D11F060BB0091993B /* TweetCell.m */,
 				417F7D6F11F0C7CD0091993B /* TweetGroup.h */,
 				417F7D7011F0C7CD0091993B /* TweetGroup.m */,
+				41925AD0120854CA00629AD8 /* TweetRepository.h */,
+				41925AD1120854CA00629AD8 /* TweetRepository.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 				41AA9CAE11EFAF980044FA6C /* TweetTemplate.m in Sources */,
 				417F7D5E11F060BB0091993B /* TweetCell.m in Sources */,
 				417F7D7111F0C7CD0091993B /* TweetGroup.m in Sources */,
+				41925AD2120854CA00629AD8 /* TweetRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

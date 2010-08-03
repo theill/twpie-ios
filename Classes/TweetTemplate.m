@@ -15,7 +15,7 @@
 - (id)initWithText:(NSString *)t group:(NSString *)g {
 	self.text = t;
 	self.group = g;
-	self.usageCount = 0;
+	self.usageCount = 1;
 	self.updatedAt = [NSDate date];
 
 	return self;
@@ -23,9 +23,7 @@
 
 - (id)initWithTweet:(NSString *)tweet {
 	NSLog(@"Initializing tweet with %@", tweet);
-	NSString *t = @"a";
-	NSString *g = @"b";
-	return [self initWithText:t group:g];
+	return [self initWithText:[self extractTextFrom:tweet] group:[self extractGroupFrom:tweet]];
 }
 
 - (void)increase {
@@ -52,7 +50,7 @@
 }
 
 - (NSString *)extractTextFrom:(NSString *)tweet {
-	return [tweet substringToIndex:[[self extractGroupFrom:tweet] length]];
+	return [[tweet substringFromIndex:[[self extractGroupFrom:tweet] length]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 - (NSString *)tweet {
@@ -83,6 +81,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	//Encode properties, other class variables, etc
     [encoder encodeObject:self.text forKey:@"text"];
+    [encoder encodeObject:self.group forKey:@"group"];
     [encoder encodeInt:self.usageCount forKey:@"usage_count"];
     [encoder encodeObject:self.updatedAt forKey:@"updated_at"];
 }
@@ -92,6 +91,7 @@
     if (self != nil) {
 		//decode properties, other class vars
         self.text = [decoder decodeObjectForKey:@"text"];
+        self.group = [decoder decodeObjectForKey:@"group"];
         self.usageCount = [decoder decodeIntForKey:@"usage_count"];
         self.updatedAt = [decoder decodeObjectForKey:@"updated_at"];
     }

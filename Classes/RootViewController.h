@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "TweetTemplate.h"
+#import "TweetRepository.h"
 
 @interface RootViewController : UIViewController {
 
 @private
-	NSMutableArray *tweets;
+	TweetRepository *tweetRepository;
 	IBOutlet UITableView *messagesTableView;
 }
 
@@ -21,6 +22,6 @@
 - (void)setupSampleTweets;
 
 @property (nonatomic, retain) UITableView *messagesTableView;
-@property (nonatomic, retain) NSMutableArray *tweets;
+@property (nonatomic, retain) TweetRepository *tweetRepository;
 
 @end

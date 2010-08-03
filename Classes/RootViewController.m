@@ -19,7 +19,7 @@
 @implementation RootViewController
 
 @synthesize messagesTableView;
-@synthesize tweets;
+@synthesize tweetRepository;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -33,7 +33,7 @@
 	[defaults setBool:TRUE forKey:@"setupcomplete"];
 	[defaults setObject:@"theilltest" forKey:@"username"];
 	[defaults setObject:@"653976" forKey:@"password"];
-	if ([[self tweets] count] == 0) {
+	if ([[[self tweetRepository] tweets] count] == 0) {
 		[self setupSampleTweets];
 	}
 #endif
@@ -52,7 +52,7 @@
 		[welcome release];
 	}
 
-	self.navigationItem.title = @"Messages";
+	self.navigationItem.title = @"Tweets";
     
 	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
 	self.navigationItem.rightBarButtonItem = addButton;
@@ -90,19 +90,26 @@
 }
  */
 
+// reorganize array of tweets based on group and usage count
+- (void)reorganizeTweets {
+	
+}
+
 - (void)configureCell:(TweetCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-	TweetTemplate *tweet = [self.tweets objectAtIndex:[indexPath row]];
+	TweetTemplate *tweet = [[[self tweetRepository] weighted] objectAtIndex:[indexPath row]];
 //	cell.textLabel.text = [tweet text];
 	
 	cell.groupNameLabel.text = [tweet group];
-	cell.messageLabel.text = [tweet text];
+	cell.messageLabel.text = [[tweet text] stringByAppendingFormat:@" (%d)", [tweet usageCount]];
+	
+	int offset = (cell.groupNameLabel.text.length > 0) ? 8 : 0;
 	
 	CGSize sizeToMakeLabel = [cell.groupNameLabel.text sizeWithFont:cell.groupNameLabel.font];
-	cell.groupNameLabel.frame = CGRectMake(cell.groupNameLabel.frame.origin.x + 4,
-										   cell.groupNameLabel.frame.origin.y + 4,
+	cell.groupNameLabel.frame = CGRectMake(cell.groupNameLabel.frame.origin.x,
+										   cell.groupNameLabel.frame.origin.y,
 										   sizeToMakeLabel.width,
-										   sizeToMakeLabel.height);
-	cell.messageLabel.frame = CGRectMake(cell.groupNameLabel.frame.origin.x + cell.groupNameLabel.frame.size.width + 8,
+										   cell.groupNameLabel.frame.size.height);
+	cell.messageLabel.frame = CGRectMake(cell.groupNameLabel.frame.origin.x + cell.groupNameLabel.frame.size.width + offset,
 										  cell.messageLabel.frame.origin.y,
 										  cell.messageLabel.frame.size.width,
 										  cell.messageLabel.frame.size.height);
@@ -113,11 +120,7 @@
 #pragma mark Add a new object
 
 - (void)insertNewObject {
-	TweetTemplate *tweet = [[TweetTemplate alloc] initWithText:@"" group:@""];
-	[[self tweets] addObject:tweet];
-	[tweet release];
-	
-	[self editMessage:[[self tweets] lastObject]];
+	[self editMessage:nil];
 }
 
 
@@ -132,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	NSLog(@"tableView:numberOfRowsInSection:");
-	return [tweets count];
+	return [[[self tweetRepository] tweets] count];
 }
 
 
@@ -145,6 +148,7 @@
     if (cell == nil) {
 		cell = [[[NSBundle mainBundle] loadNibNamed:@"TweetCell" owner:self options:nil] objectAtIndex:0];
 //		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//		[cell setSelectedBackgroundView:<#(UIView *)#>
 
 		//		UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"updates-bg.png"]];
 		//		[cell setBackgroundView:bgView];
@@ -172,7 +176,8 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSLog(@"tableView:commitEditingStyle:");
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
-		[[self tweets] removeObjectAtIndex:[indexPath row]];
+		TweetTemplate *doomed = [[[self tweetRepository] weighted] objectAtIndex:[indexPath row]];
+		[[[self tweetRepository] tweets] removeObjectForKey:[doomed tweet]];
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 	}   
 }
@@ -190,13 +195,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSLog(@"Clicked row at %d", indexPath.row);
 	
-	TweetTemplate *tweet = [[self tweets] objectAtIndex:[indexPath row]];
+	TweetTemplate *tweet = [[[self tweetRepository] weighted] objectAtIndex:[indexPath row]];
 	[self editMessage:tweet];
 }
 
 - (void)editMessage:(TweetTemplate *)selectedObject {
 	MessageViewController *messageViewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
 	[messageViewController setSelectedObject:selectedObject];
+	[messageViewController setDelegate:self];
 	[self.navigationController pushViewController:messageViewController animated:YES];
 	[messageViewController release];
 }
@@ -211,17 +217,34 @@
 	[self setupSampleTweets];
 }
 
+#pragma mark -
+#pragma mark Tweet events
+
+- (void)tweetSent:(UIViewController *)controller text:(NSString *)t {
+	NSLog(@"tweetSent");
+	
+	TweetTemplate *tt = [[TweetTemplate alloc] initWithTweet:t];
+	[[self tweetRepository] add:tt];
+	[tt release];
+	
+	[self reorganizeTweets];
+	
+	[[self messagesTableView] reloadData];
+}
+
+#pragma mark -
+
 - (void)setupSampleTweets {
 	TweetTemplate *tweet = [[TweetTemplate alloc] initWithText:@"coffee" group:@"@having"];
-	[[self tweets] addObject:tweet];
+	[[self tweetRepository] add:tweet];
 	[tweet release];
 
 	tweet = [[TweetTemplate alloc] initWithText:@"a beer" group:@"@having"];
-	[[self tweets] addObject:tweet];
+	[[self tweetRepository] add:tweet];
 	[tweet release];
 	
 	tweet = [[TweetTemplate alloc] initWithText:@"w 85.4" group:@"d reporting"];
-	[[self tweets] addObject:tweet];
+	[[self tweetRepository] add:tweet];
 	[tweet release];
 }
 

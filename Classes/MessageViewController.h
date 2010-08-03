@@ -11,13 +11,21 @@
 #import "MGTwitterEngine.h"
 #import "TweetTemplate.h"
 
+@protocol MessageViewControllerDelegate;
+
 @interface MessageViewController : UIViewController {
+	id<MessageViewControllerDelegate> delegate;
 	TweetTemplate *selectedObject;
 	MGTwitterEngine *engine;
 
 	IBOutlet UITextView *message;
 }
 
+@property(nonatomic, assign) id delegate;
 @property (nonatomic, retain) TweetTemplate *selectedObject;
 
+@end
+
+@protocol MessageViewControllerDelegate
+- (void)tweetSent:(UIViewController *)controller text:(NSString *)t;
 @end

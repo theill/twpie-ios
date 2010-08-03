@@ -13,30 +13,21 @@
 
 @synthesize window;
 @synthesize navigationController;
-@synthesize tweets;
 
 #pragma mark -
 #pragma mark Application lifecycle
 
 - (void)awakeFromNib {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	NSData *dataRepresentingSavedArray = [defaults objectForKey:@"tweets"];
-	if (dataRepresentingSavedArray != nil) {
-		NSArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
-        if (oldSavedArray != nil) {
-			self.tweets= [[NSMutableArray alloc] initWithArray:oldSavedArray];
-		}
-        else {
-			self.tweets = [[NSMutableArray alloc] init];
-		}
-	}
-	else {
-		self.tweets = [[NSMutableArray alloc] init];
-	}
+//	navigationController.navigationBar.barStyle = UIBarStyleBlack;
+//	navigationController.navigationBar.translucent = NO;
+//	navigationController.navigationBar.tintColor = [UIColor colorWithRed:242/255.0 green:193.0/255.0 blue:74.0/255.0 alpha:1];
+	//navigationController.navigationBar.tintColor = [UIColor colorWithRed:.75 green:.75 blue:.25 alpha:1];
 	
 	RootViewController *rootViewController = (RootViewController *)[navigationController topViewController];
-	rootViewController.tweets = [self tweets];
+	TweetRepository *tweetRepository = [[TweetRepository alloc] init];
+	rootViewController.tweetRepository = tweetRepository;
+	[tweetRepository release];
 }
 
 
@@ -88,7 +79,7 @@
 	RootViewController *rootViewController = (RootViewController *)[navigationController topViewController];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:[rootViewController tweets]];
+	NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:[[rootViewController tweetRepository] weighted]];
 	[defaults setObject:myEncodedObject forKey:@"tweets"];
 }
 
