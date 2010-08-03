@@ -38,11 +38,15 @@
     [super viewWillAppear:animated];
 }
 */
-/*
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+	
+	// select 'text' part of tweet
+	TweetTemplate *tweet = [self selectedObject];
+	message.selectedRange = [[message text] rangeOfString:[tweet text]];
 }
-*/
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
