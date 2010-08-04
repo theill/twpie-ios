@@ -30,18 +30,18 @@
    e.g. above sentences would result in
  
    d having == (6)
-     coffee (3)
-     a glass of wine (1)
-     a nice cup of coffee (1)
-     a snack (1)
+	 coffee (3)
+	 a glass of wine (1)
+	 a nice cup of coffee (1)
+	 a snack (1)
  
    d reporting == (4)
-     w 81.3 (2)
-     t call jonas re: dakofa (1)
-     w 84.1 (1)
+	 w 81.3 (2)
+	 t call jonas re: dakofa (1)
+	 w 84.1 (1)
    
    @having == (1)
-     coffee (1)
+	 coffee (1)
  
  * it must be possible to select both group and message since
    users might want to send a new message to "d having", etc.

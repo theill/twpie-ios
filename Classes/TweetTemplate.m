@@ -80,22 +80,22 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	//Encode properties, other class variables, etc
-    [encoder encodeObject:self.text forKey:@"text"];
-    [encoder encodeObject:self.group forKey:@"group"];
-    [encoder encodeInt:self.usageCount forKey:@"usage_count"];
-    [encoder encodeObject:self.updatedAt forKey:@"updated_at"];
+	[encoder encodeObject:self.text forKey:@"text"];
+	[encoder encodeObject:self.group forKey:@"group"];
+	[encoder encodeInt:self.usageCount forKey:@"usage_count"];
+	[encoder encodeObject:self.updatedAt forKey:@"updated_at"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
-    self = [super init];
-    if (self != nil) {
+	self = [super init];
+	if (self != nil) {
 		//decode properties, other class vars
-        self.text = [decoder decodeObjectForKey:@"text"];
-        self.group = [decoder decodeObjectForKey:@"group"];
-        self.usageCount = [decoder decodeIntForKey:@"usage_count"];
-        self.updatedAt = [decoder decodeObjectForKey:@"updated_at"];
-    }
-    return self;
+		self.text = [decoder decodeObjectForKey:@"text"];
+		self.group = [decoder decodeObjectForKey:@"group"];
+		self.usageCount = [decoder decodeIntForKey:@"usage_count"];
+		self.updatedAt = [decoder decodeObjectForKey:@"updated_at"];
+	}
+	return self;
 }
 
 @end

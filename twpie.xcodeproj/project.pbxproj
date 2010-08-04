@@ -27,7 +27,6 @@
 		41AA9CAE11EFAF980044FA6C /* TweetTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AA9CAD11EFAF980044FA6C /* TweetTemplate.m */; };
 		41C5A38911EE4E6B00E634ED /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C5A38711EE4E6B00E634ED /* MessageViewController.m */; };
 		41C5A38A11EE4E6B00E634ED /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41C5A38811EE4E6B00E634ED /* MessageViewController.xib */; };
-		41C5A44F11EE614100E634ED /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C5A44E11EE614100E634ED /* libxml2.dylib */; };
 		41C5A54A11EF0F3700E634ED /* MGTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C5A53511EF0F3700E634ED /* MGTwitterEngine.m */; };
 		41C5A54B11EF0F3700E634ED /* MGTwitterHTTPURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C5A53911EF0F3700E634ED /* MGTwitterHTTPURLConnection.m */; };
 		41C5A54C11EF0F3700E634ED /* MGTwitterLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C5A53B11EF0F3700E634ED /* MGTwitterLibXMLParser.m */; };
@@ -37,6 +36,12 @@
 		41C5A55011EF0F3700E634ED /* MGTwitterUsersLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C5A54511EF0F3700E634ED /* MGTwitterUsersLibXMLParser.m */; };
 		41C5A55111EF0F3700E634ED /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C5A54711EF0F3700E634ED /* NSData+Base64.m */; };
 		41C5A55211EF0F3700E634ED /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C5A54911EF0F3700E634ED /* NSString+UUID.m */; };
+		41FF763D12094F99009139E9 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FF763C12094F99009139E9 /* libxml2.2.dylib */; };
+		41FF76ED120968AE009139E9 /* login-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 41FF76EC120968AE009139E9 /* login-bg.png */; };
+		41FF770212096B9D009139E9 /* login-head-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 41FF770112096B9D009139E9 /* login-head-bg.png */; };
+		41FF784812099379009139E9 /* twitter-bird-writing.png in Resources */ = {isa = PBXBuildFile; fileRef = 41FF784712099379009139E9 /* twitter-bird-writing.png */; };
+		41FF784B12099412009139E9 /* messages-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 41FF784A12099412009139E9 /* messages-bg.png */; };
+		41FF78F21209AA69009139E9 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41FF78F11209AA69009139E9 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +64,7 @@
 		417F7D7011F0C7CD0091993B /* TweetGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetGroup.m; sourceTree = "<group>"; };
 		419257D21206E8A800629AD8 /* TweetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
 		41925AD0120854CA00629AD8 /* TweetRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetRepository.h; sourceTree = "<group>"; };
-		41925AD1120854CA00629AD8 /* TweetRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetRepository.m; sourceTree = "<group>"; };
+		41925AD1120854CA00629AD8 /* TweetRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = TweetRepository.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
 		41AA9AB111EF7C2D0044FA6C /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		41AA9AB211EF7C2D0044FA6C /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		41AA9AB311EF7C2D0044FA6C /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WelcomeViewController.xib; path = Classes/WelcomeViewController.xib; sourceTree = "<group>"; };
@@ -70,7 +75,6 @@
 		41C5A38611EE4E6B00E634ED /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		41C5A38711EE4E6B00E634ED /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		41C5A38811EE4E6B00E634ED /* MessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MessageViewController.xib; path = Classes/MessageViewController.xib; sourceTree = "<group>"; };
-		41C5A44E11EE614100E634ED /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		41C5A53411EF0F3700E634ED /* MGTwitterEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTwitterEngine.h; sourceTree = "<group>"; };
 		41C5A53511EF0F3700E634ED /* MGTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTwitterEngine.m; sourceTree = "<group>"; };
 		41C5A53611EF0F3700E634ED /* MGTwitterEngineDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTwitterEngineDelegate.h; sourceTree = "<group>"; };
@@ -93,6 +97,12 @@
 		41C5A54711EF0F3700E634ED /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		41C5A54811EF0F3700E634ED /* NSString+UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUID.h"; sourceTree = "<group>"; };
 		41C5A54911EF0F3700E634ED /* NSString+UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUID.m"; sourceTree = "<group>"; };
+		41FF763C12094F99009139E9 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		41FF76EC120968AE009139E9 /* login-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-bg.png"; sourceTree = "<group>"; };
+		41FF770112096B9D009139E9 /* login-head-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-head-bg.png"; sourceTree = "<group>"; };
+		41FF784712099379009139E9 /* twitter-bird-writing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-bird-writing.png"; sourceTree = "<group>"; };
+		41FF784A12099412009139E9 /* messages-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messages-bg.png"; sourceTree = "<group>"; };
+		41FF78F11209AA69009139E9 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* twpie-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "twpie-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,7 +115,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */,
-				41C5A44F11EE614100E634ED /* libxml2.dylib in Frameworks */,
+				41FF763D12094F99009139E9 /* libxml2.2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +162,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				41FF78F11209AA69009139E9 /* Settings.bundle */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -168,6 +179,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				41FF784A12099412009139E9 /* messages-bg.png */,
+				41FF770112096B9D009139E9 /* login-head-bg.png */,
+				41FF784712099379009139E9 /* twitter-bird-writing.png */,
+				41FF76EC120968AE009139E9 /* login-bg.png */,
 				41AA9B1711EF86D00044FA6C /* bird.png */,
 				41AA9B3B11EF8E970044FA6C /* icon.png */,
 				419257D21206E8A800629AD8 /* TweetCell.xib */,
@@ -183,11 +198,11 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				41C5A44E11EE614100E634ED /* libxml2.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 				28860BE40F44EE6400985440 /* CoreData.framework */,
+				41FF763C12094F99009139E9 /* libxml2.2.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -259,7 +274,6 @@
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "twpie" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -289,6 +303,11 @@
 				41AA9B1811EF86D00044FA6C /* bird.png in Resources */,
 				41AA9B3C11EF8E970044FA6C /* icon.png in Resources */,
 				419257D31206E8A800629AD8 /* TweetCell.xib in Resources */,
+				41FF76ED120968AE009139E9 /* login-bg.png in Resources */,
+				41FF770212096B9D009139E9 /* login-head-bg.png in Resources */,
+				41FF784812099379009139E9 /* twitter-bird-writing.png in Resources */,
+				41FF784B12099412009139E9 /* messages-bg.png in Resources */,
+				41FF78F21209AA69009139E9 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +380,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = $SDKROOT/usr/include/libxml2;
+				HEADER_SEARCH_PATHS = "$SDKROOT/usr/include/libxml2/**";
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.2;
 			};
@@ -375,6 +394,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$SDKROOT/usr/include/libxml2/**";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
 				SDKROOT = iphoneos4.0;

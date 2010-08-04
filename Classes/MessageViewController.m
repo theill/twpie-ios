@@ -10,8 +10,7 @@
 
 @implementation MessageViewController
 
-@synthesize delegate;
-@synthesize selectedObject;
+@synthesize delegate, tweet, activity;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -19,11 +18,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	TweetTemplate *tweet = [self selectedObject];
-	
-	NSLog(@"Loading tweet %@", tweet);
-	
-	[message setText:[tweet tweet]];
+	[message setText:[[self tweet] tweet]];
 	[message becomeFirstResponder];
 	
 	self.navigationItem.title = @"New Tweet";
@@ -35,33 +30,34 @@
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+	[super viewWillAppear:animated];
 }
 */
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+	[super viewDidAppear:animated];
 	
 	// select 'text' part of tweet
-	TweetTemplate *tweet = [self selectedObject];
-	message.selectedRange = [[message text] rangeOfString:[tweet text]];
+	if ([self tweet]) {
+		message.selectedRange = [[message text] rangeOfString:[[self tweet] text]];
+	}
 }
 
 /*
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+	[super viewWillDisappear:animated];
 }
 */
 /*
 - (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+	[super viewDidDisappear:animated];
 }
 */
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	// Return YES for supported orientations
+	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
 
@@ -70,15 +66,15 @@
 #pragma mark Memory management
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Relinquish ownership any cached data, images, etc that aren't in use.
+	// Releases the view if it doesn't have a superview.
+	[super didReceiveMemoryWarning];
+	
+	// Relinquish ownership any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+	// Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+	// For example: self.myOutlet = nil;
 	[engine release]; engine = nil;
 }
 
@@ -90,6 +86,7 @@
 	
 	NSLog(@"Sending %@ update message to twitter", [message	text]);
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	[activity startAnimating];
 	[engine sendUpdate:[message text]];	
 }
 
@@ -97,11 +94,8 @@
 	NSLog(@"Got back response for identifier %@", connectionIdentifier);
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	[activity stopAnimating];
 	
-//	// store recently sent tweet
-//	TweetTemplate *tweet = [self selectedObject];
-//	[tweet setTweet:[message text]];
-
 	[self.delegate tweetSent:self text:[message text]];
 
 	// pop controller once message has been successfully sent
@@ -112,12 +106,12 @@
 	NSLog(@"Failed to send tweet for identifier %@. Got error %@", connectionIdentifier, error);
 
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	[activity stopAnimating];
 
 	// we might pop up welcome screen here?
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-	NSLog(@"shouldChangeTextInRange");
 	if ([text isEqualToString:@"\n"]) {
 		[message resignFirstResponder];
 		[self sendTweet];
@@ -128,9 +122,7 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
+	[super dealloc];
 }
 
-
 @end
-

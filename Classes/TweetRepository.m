@@ -15,21 +15,16 @@
 
 NSInteger usageCountUpdatedSort2(id msg1, id msg2, void *context) {
 	int usageCount1 = [msg1 usageCount];
-    int usageCount2 = [msg2 usageCount];
-    if (usageCount1 < usageCount2) {
+	int usageCount2 = [msg2 usageCount];
+	if (usageCount1 < usageCount2) {
 		return NSOrderedDescending;
 	}
-    else if (usageCount1 > usageCount2) {
+	else if (usageCount1 > usageCount2) {
 		return NSOrderedAscending;
-    }
+	}
 	else {
-		if ([msg1 updatedAt] < [msg2 updatedAt]) {
-			return NSOrderedAscending;
-		}
-		else if ([msg1 updatedAt] > [msg2 updatedAt]) {
-			return NSOrderedDescending;
-		}
-		return NSOrderedSame;
+		// sort by latest update time if usage count is the same
+		return [[msg2 updatedAt] compare:[msg1 updatedAt]];
 	}
 }
 
@@ -41,10 +36,10 @@ NSInteger usageCountUpdatedSort2(id msg1, id msg2, void *context) {
 	NSData *dataRepresentingSavedArray = [defaults objectForKey:@"tweets"];
 	if (dataRepresentingSavedArray != nil) {
 		NSArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
-        if (oldSavedArray != nil) {
+		if (oldSavedArray != nil) {
 			weightedTweets = [[NSMutableArray alloc] initWithArray:oldSavedArray];
 		}
-        else {
+		else {
 			weightedTweets = [[NSMutableArray alloc] init];
 		}
 	}
@@ -62,6 +57,8 @@ NSInteger usageCountUpdatedSort2(id msg1, id msg2, void *context) {
 		[[self tweets] setObject:tweet forKey:[tweet tweet]];
 	}
 	
+	[weightedTweets release];
+	
 	return self;
 }
 
@@ -71,9 +68,7 @@ NSInteger usageCountUpdatedSort2(id msg1, id msg2, void *context) {
 		[t increase];
 	}
 	else {
-		t = [[TweetTemplate alloc] initWithTweet:[tweet tweet]];
-		[[self tweets] setObject:t forKey:[tweet tweet]];
-		[t release];
+		[[self tweets] setObject:tweet forKey:[tweet tweet]];
 	}
 }
 

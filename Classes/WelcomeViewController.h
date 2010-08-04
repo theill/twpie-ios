@@ -15,6 +15,8 @@
 	id<WelcomeViewControllerDelegate> delegate;
 	IBOutlet UITextField *usernameTextField;
 	IBOutlet UITextField *passwordTextField;
+	IBOutlet UITextView *introduction;
+	IBOutlet UIActivityIndicatorView *activity;
 
 	MGTwitterEngine *engine;
 }
@@ -24,9 +26,11 @@
 @property(nonatomic, assign) id delegate;
 @property(nonatomic, retain) UITextField *usernameTextField;
 @property(nonatomic, retain) UITextField *passwordTextField;
+@property(nonatomic, retain) UITextView *introduction;
+@property(nonatomic, retain) UIActivityIndicatorView *activity;
 
 @end
 
 @protocol WelcomeViewControllerDelegate
-- (void)configurationDidChange:(WelcomeViewController *)controller;
+- (void)configurationDidComplete:(WelcomeViewController *)controller;
 @end

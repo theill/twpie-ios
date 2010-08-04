@@ -10,13 +10,15 @@
 #import "TweetTemplate.h"
 
 @interface TweetCell : UITableViewCell {
-	TweetTemplate *template;
+	TweetTemplate *tweet;
 	
 	IBOutlet UILabel *groupNameLabel;
 	IBOutlet UILabel *messageLabel;
 }
 
-@property (nonatomic, retain) TweetTemplate *template;
+- (void)configure:(TweetTemplate *)tweet;
+
+@property (nonatomic, retain) TweetTemplate *tweet;
 
 @property (nonatomic, retain) IBOutlet UILabel *groupNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *messageLabel;

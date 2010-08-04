@@ -15,14 +15,16 @@
 
 @interface MessageViewController : UIViewController {
 	id<MessageViewControllerDelegate> delegate;
-	TweetTemplate *selectedObject;
+	TweetTemplate *tweet;
 	MGTwitterEngine *engine;
 
 	IBOutlet UITextView *message;
+	IBOutlet UIActivityIndicatorView *activity;
 }
 
 @property(nonatomic, assign) id delegate;
-@property (nonatomic, retain) TweetTemplate *selectedObject;
+@property (nonatomic, retain) TweetTemplate *tweet;
+@property (nonatomic, retain) UIActivityIndicatorView *activity;
 
 @end
 

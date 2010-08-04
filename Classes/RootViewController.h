@@ -18,7 +18,7 @@
 	IBOutlet UITableView *messagesTableView;
 }
 
-- (void)editMessage:(TweetTemplate *)obj;
+- (void)editMessage:(TweetTemplate *)tweet;
 - (void)setupSampleTweets;
 
 @property (nonatomic, retain) UITableView *messagesTableView;
