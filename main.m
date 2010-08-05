@@ -3,7 +3,7 @@
 //  twpie
 //
 //  Created by Peter Theill on 7/14/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright Commanigy 2010. All rights reserved.
 //
 
 
@@ -11,6 +11,10 @@
  
  Using Twitter palette found at http://www.colourlovers.com/palette/293695/Twitter
  Using pattern for messages found at http://www.colourlovers.com/pattern/582552/saturday_warmth
+ 
+ Contact sites for help with promotion:
+  (@iquit) http://qwitter.tobaccofreeflorida.com/english/instructions/
+  (@having) http://foodfeed.us/
  
  
  */

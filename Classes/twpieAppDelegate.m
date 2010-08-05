@@ -76,7 +76,7 @@
  applicationWillTerminate: saves changes in the application's managed object context before the application terminates.
  */
 - (void)applicationWillTerminate:(UIApplication *)application {
-	RootViewController *rootViewController = (RootViewController *)[navigationController topViewController];
+	RootViewController *rootViewController = (RootViewController *)[navigationController parentViewController];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:[[rootViewController tweetRepository] weighted]];

@@ -26,17 +26,17 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	
+		
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-#if DEBUG
-	[defaults setBool:TRUE forKey:@"setupcomplete"];
-	[defaults setObject:@"theilltest" forKey:@"username"];
-	[defaults setObject:@"653976" forKey:@"password"];
-	if ([[[self tweetRepository] tweets] count] == 0) {
-		[self setupSampleTweets];
-	}
-#endif
+//#if DEBUG
+//	[defaults setBool:TRUE forKey:@"setupcomplete"];
+//	[defaults setObject:@"theilltest" forKey:@"username"];
+//	[defaults setObject:@"653976" forKey:@"password"];
+//	if ([[[self tweetRepository] tweets] count] == 0) {
+//		[self setupSampleTweets];
+//	}
+//#endif
 	if ([defaults boolForKey:@"setupcomplete"] == YES) {
 		NSLog(@"Setup complete, just continue with normal work");
 	}
@@ -216,17 +216,16 @@
 #pragma mark -
 
 - (void)setupSampleTweets {
-	TweetTemplate *tweet = [[TweetTemplate alloc] initWithTweet:@"@having coffee"];
-	[[self tweetRepository] add:tweet];
-	[tweet release];
+	NSArray *tweets = [NSArray arrayWithObjects:@"d reporting w 85.4", @"@iquit 1", @"@having coffee", nil];
 	
-	tweet = [[TweetTemplate alloc] initWithTweet:@"@having a beer"];
-	[[self tweetRepository] add:tweet];
-	[tweet release];
+	NSEnumerator *e = [tweets objectEnumerator];
 	
-	tweet = [[TweetTemplate alloc] initWithTweet:@"d reporting w 85.4"];
-	[[self tweetRepository] add:tweet];
-	[tweet release];
+	NSString *t;
+	while (t = [e nextObject]) {
+		TweetTemplate *tweet = [[TweetTemplate alloc] initWithTweet:t];
+		[[self tweetRepository] add:tweet];
+		[tweet release];
+	}
 }
 
 

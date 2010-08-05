@@ -11,7 +11,7 @@
 @implementation WelcomeViewController
 
 NSUserDefaults *defaults;
-NSString *followersToken;
+NSString *userTimelineToken;
 
 @synthesize usernameTextField, passwordTextField, introduction, activity;
 @synthesize delegate;
@@ -70,7 +70,7 @@ NSString *followersToken;
 	[engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
 	[engine setClientName:@"web" version:@"1.0" URL:@"" token:@""];
 	
-	followersToken = [engine getUserTimelineFor:[engine username] sinceID:0 startingAtPage:0 count:1];
+	userTimelineToken = [engine getUserTimelineFor:[defaults stringForKey:@"username"] sinceID:0 startingAtPage:0 count:10];
 //	followersToken = [engine getFollowersIncludingCurrentStatus:YES]; 
 }
 
@@ -79,7 +79,7 @@ NSString *followersToken;
 
 - (void)requestSucceeded:(NSString *)requestIdentifier{
 	NSLog(@"requestSucceeded : %@", requestIdentifier);
-	if ([requestIdentifier isEqual:followersToken]) {
+	if ([requestIdentifier isEqual:userTimelineToken]) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Settings Saved" message:@"Your twitter details have been saved and tested" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[activity stopAnimating];
 //		[saveButton setEnabled:YES];
@@ -97,7 +97,7 @@ NSString *followersToken;
 
 - (void)requestFailed:(NSString *)requestIdentifier withError:(NSError *)error{
 	NSLog(@"requestFailed:%@withError%@", requestIdentifier, error );
-	if ([requestIdentifier isEqual:followersToken]) {
+	if ([requestIdentifier isEqual:userTimelineToken]) {
 		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Your twitter details are either incorrect or Twitter is down." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[activity stopAnimating];
 //		[saveButton setEnabled:YES];
@@ -111,13 +111,19 @@ NSString *followersToken;
 }
 
 - (void)statusesReceived:(NSArray *)statuses forRequest:(NSString *)connectionIdentifier {
-	NSLog(@"statusesReceived: %d and %@", [statuses count], connectionIdentifier);
-	
-	if ([statuses count] > 0) {
-		NSDictionary *dict = (NSDictionary*)[statuses objectAtIndex:0];
-		NSString *txt = [dict objectForKey:@"text"];
-		NSLog(@"we got %@", txt);
-	}
+	// we don't need to use this information yet - in a future release it could make sense
+	// to analyse a bulk of messsages and try to recognize any patterns
+//	NSLog(@"statusesReceived: %d and %@", [statuses count], connectionIdentifier);
+//	
+//	if ([statuses count] > 0) {
+//		NSEnumerator *enumerator = [statuses objectEnumerator];
+//		NSDictionary *dict;
+//		
+//		while (dict = [enumerator nextObject]) {
+//			NSString *txt = [dict objectForKey:@"text"];
+//			NSLog(@"we got %@", txt);
+//		}		
+//	}
 }
 
 #pragma mark -
