@@ -25,7 +25,6 @@
 	defaults = [NSUserDefaults standardUserDefaults];
 	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
 	[engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
-	[engine setClientName:@"web" version:@"1.0" URL:@"" token:@""];
 }
 
 /*

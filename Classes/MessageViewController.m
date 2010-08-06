@@ -82,7 +82,6 @@
 - (void)sendTweet {
 	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
 	[engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
-	[engine setClientName:@"web" version:nil URL:nil token:nil];
 	
 #if ENABLE_OAUTH
 	OAToken *token = [[[OAToken alloc] initWithUserDefaultsUsingServiceProviderName:@"twpie" prefix:@""] autorelease];

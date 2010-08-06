@@ -50,17 +50,6 @@
  
  we do not need to support this
  
- = classes
- 
- TweetGroup
-   name (NSString with e.g. 'd reporting')
-   messages (NSMutableDictionary of TweetMessage instances)
- 
- TweetMessage (aka TweetTemplate)
-   text (NSString with e.g. 'w 81.3')
-   usage_count (int, number of uses for this specific message)
-   updated_at (DateTime for last increase in 'usage_count')
- 
  */
 
 #import <Foundation/Foundation.h>
