@@ -44,7 +44,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIImageView" id="763034078">
 						<reference key="NSNextResponder" ref="310431002"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 80}, {320, 400}}</string>
 						<reference key="NSSuperview" ref="310431002"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>

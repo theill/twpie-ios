@@ -15,6 +15,7 @@
 
 - (void)add:(TweetTemplate *)tweet;
 - (NSMutableArray *)weighted;
+- (void)persistTweets;
 
 @property (nonatomic, retain) NSMutableDictionary *tweets;
 

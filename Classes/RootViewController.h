@@ -22,6 +22,6 @@
 - (void)setupSampleTweets;
 
 @property (nonatomic, retain) UITableView *messagesTableView;
-@property (nonatomic, retain) TweetRepository *tweetRepository;
+@property (nonatomic, retain, readonly) TweetRepository *tweetRepository;
 
 @end

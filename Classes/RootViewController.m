@@ -15,28 +15,26 @@
 - (void)configureCell:(TweetCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
-
 @implementation RootViewController
 
-@synthesize tweetRepository;
-@synthesize messagesTableView;
+@synthesize messagesTableView, tweetRepository;
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-		
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
+	tweetRepository = [[TweetRepository alloc] init];
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //#if DEBUG
 //	[defaults setBool:TRUE forKey:@"setupcomplete"];
 //	[defaults setObject:@"theilltest" forKey:@"username"];
 //	[defaults setObject:@"653976" forKey:@"password"];
-//	if ([[[self tweetRepository] tweets] count] == 0) {
-//		[self setupSampleTweets];
-//	}
+//	[self setupSampleTweets];
 //#endif
+	
 	if ([defaults boolForKey:@"setupcomplete"] == YES) {
 		NSLog(@"Setup complete, just continue with normal work");
 	}
@@ -247,6 +245,7 @@
 
 
 - (void)dealloc {
+	[tweetRepository release];
 	[super dealloc];
 }
 

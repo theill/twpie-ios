@@ -68,7 +68,7 @@
 					</object>
 					<object class="IBUIImageView" id="301424833">
 						<reference key="NSNextResponder" ref="406511434"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{0, 200}, {320, 216}}</string>
 						<reference key="NSSuperview" ref="406511434"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -80,7 +80,7 @@
 					</object>
 					<object class="IBUIActivityIndicatorView" id="583881033">
 						<reference key="NSNextResponder" ref="406511434"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">-2147483384</int>
 						<string key="NSFrame">{{141, 223}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="406511434"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -89,7 +89,7 @@
 					</object>
 					<object class="IBUIImageView" id="77588867">
 						<reference key="NSNextResponder" ref="406511434"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">264</int>
 						<string key="NSFrame">{{96, 268}, {128, 128}}</string>
 						<reference key="NSSuperview" ref="406511434"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -177,10 +177,10 @@
 						<reference key="object" ref="406511434"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="467776003"/>
 							<reference ref="301424833"/>
 							<reference ref="77588867"/>
 							<reference ref="583881033"/>
+							<reference ref="467776003"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>

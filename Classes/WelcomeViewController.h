@@ -19,6 +19,10 @@
 	IBOutlet UIActivityIndicatorView *activity;
 
 	MGTwitterEngine *engine;
+@private
+	NSUserDefaults *defaults;
+	NSString *userTimelineToken;
+	NSString *xauthRequestToken;
 }
 
 - (IBAction)settingsDone:(id)sender;

@@ -7,6 +7,7 @@
 //
 
 #import "MessageViewController.h"
+#import "TwitterSettings.h"
 
 @implementation MessageViewController
 
@@ -38,8 +39,8 @@
 	[super viewDidAppear:animated];
 	
 	// select 'text' part of tweet
-	if ([self tweet]) {
-		message.selectedRange = [[message text] rangeOfString:[[self tweet] text]];
+	if (self.tweet) {
+		message.selectedRange = [message.text rangeOfString:self.tweet.text];
 	}
 }
 
@@ -80,9 +81,16 @@
 
 - (void)sendTweet {
 	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
+	[engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
 	[engine setClientName:@"web" version:nil URL:nil token:nil];
+	
+#if ENABLE_OAUTH
+	OAToken *token = [[[OAToken alloc] initWithUserDefaultsUsingServiceProviderName:@"twpie" prefix:@""] autorelease];
+	[engine setAccessToken:token];
+#else
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
+#endif
 	
 	NSLog(@"Sending %@ update message to twitter", [message	text]);
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -107,6 +115,8 @@
 
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	[activity stopAnimating];
+	
+	
 
 	// we might pop up welcome screen here?
 }

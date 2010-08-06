@@ -12,37 +12,17 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Account</string>
+			<string>Twitter</string>
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
+			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Username</string>
+			<string>Authenticated</string>
 			<key>Key</key>
-			<string>username</string>
-			<key>IsSecure</key>
+			<string>setupcomplete</string>
+			<key>DefaultValue</key>
 			<false/>
-			<key>KeyboardType</key>
-			<string>Alphabet</string>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Password</string>
-			<key>Key</key>
-			<string>password</string>
-			<key>IsSecure</key>
-			<true/>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
 		</dict>
 	</array>
 </dict>

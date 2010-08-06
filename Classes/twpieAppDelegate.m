@@ -18,16 +18,13 @@
 #pragma mark Application lifecycle
 
 - (void)awakeFromNib {
-	
+	NSLog(@"MainWindow is awakening from NIB");
 //	navigationController.navigationBar.barStyle = UIBarStyleBlack;
 //	navigationController.navigationBar.translucent = NO;
 //	navigationController.navigationBar.tintColor = [UIColor colorWithRed:242/255.0 green:193.0/255.0 blue:74.0/255.0 alpha:1];
 	//navigationController.navigationBar.tintColor = [UIColor colorWithRed:.75 green:.75 blue:.25 alpha:1];
 	
-	RootViewController *rootViewController = (RootViewController *)[navigationController topViewController];
-	TweetRepository *tweetRepository = [[TweetRepository alloc] init];
-	rootViewController.tweetRepository = tweetRepository;
-	[tweetRepository release];
+//	RootViewController *rootViewController = (RootViewController *)[navigationController topViewController];
 }
 
 
@@ -76,11 +73,8 @@
  applicationWillTerminate: saves changes in the application's managed object context before the application terminates.
  */
 - (void)applicationWillTerminate:(UIApplication *)application {
-	RootViewController *rootViewController = (RootViewController *)[navigationController parentViewController];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:[[rootViewController tweetRepository] weighted]];
-	[defaults setObject:myEncodedObject forKey:@"tweets"];
+	RootViewController *rootViewController = (RootViewController *)[[navigationController viewControllers] objectAtIndex:0];
+	[[rootViewController tweetRepository] persistTweets];
 }
 
 

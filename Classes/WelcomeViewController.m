@@ -7,11 +7,9 @@
 //
 
 #import "WelcomeViewController.h"
+#import "TwitterSettings.h"
 
 @implementation WelcomeViewController
-
-NSUserDefaults *defaults;
-NSString *userTimelineToken;
 
 @synthesize usernameTextField, passwordTextField, introduction, activity;
 @synthesize delegate;
@@ -26,6 +24,8 @@ NSString *userTimelineToken;
 	
 	defaults = [NSUserDefaults standardUserDefaults];
 	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
+	[engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
+	[engine setClientName:@"web" version:@"1.0" URL:@"" token:@""];
 }
 
 /*
@@ -61,17 +61,20 @@ NSString *userTimelineToken;
 	
 	[defaults setBool:FALSE forKey:@"setupcomplete"];
 	
-	[defaults setObject:usernameTextField.text forKey:@"username"];
-	[defaults setObject:passwordTextField.text forKey:@"password"];
 //	[self hideKeyboard];
 	[activity startAnimating];
 //	[saveButton setEnabled:NO];
-	
+
+#if ENABLE_OAUTH
+	// get oauth token for this user
+	xauthRequestToken = [engine getXAuthAccessTokenForUsername:usernameTextField.text password:passwordTextField.text];
+#else
+	[defaults setObject:usernameTextField.text forKey:@"username"];
+	[defaults setObject:passwordTextField.text forKey:@"password"];
 	[engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
-	[engine setClientName:@"web" version:@"1.0" URL:@"" token:@""];
 	
-	userTimelineToken = [engine getUserTimelineFor:[defaults stringForKey:@"username"] sinceID:0 startingAtPage:0 count:10];
-//	followersToken = [engine getFollowersIncludingCurrentStatus:YES]; 
+	userTimelineToken = [engine getUserTimelineFor:usernameTextField.text sinceID:0 startingAtPage:0 count:10];
+#endif
 }
 
 #pragma mark -
@@ -97,7 +100,11 @@ NSString *userTimelineToken;
 
 - (void)requestFailed:(NSString *)requestIdentifier withError:(NSError *)error{
 	NSLog(@"requestFailed:%@withError%@", requestIdentifier, error );
-	if ([requestIdentifier isEqual:userTimelineToken]) {
+	if ([requestIdentifier isEqual:xauthRequestToken]) {
+		[activity stopAnimating];
+		[introduction setText:@"Your username and password could not be verified. Try again!"];
+		[usernameTextField becomeFirstResponder];
+	} else if ([requestIdentifier isEqual:userTimelineToken]) {
 		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Your twitter details are either incorrect or Twitter is down." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[activity stopAnimating];
 //		[saveButton setEnabled:YES];
@@ -107,6 +114,21 @@ NSString *userTimelineToken;
 		[introduction setText:@"Your username and password could not be verified. Try again!"];
 		
 		[usernameTextField becomeFirstResponder];
+	}
+}
+
+- (void)accessTokenReceived:(OAToken *)token forRequest:(NSString *)connectionIdentifier {
+	NSLog(@"got access token %@", token);
+
+	if ([connectionIdentifier isEqual:xauthRequestToken]) {
+		[engine setAccessToken:token];
+		[token storeInUserDefaultsWithServiceProviderName:@"twpie" prefix:@""];
+		
+		[activity stopAnimating];
+		[engine closeAllConnections];
+		
+		[defaults setBool:TRUE forKey:@"setupcomplete"];
+		[self.delegate configurationDidComplete:self];
 	}
 }
 
@@ -144,10 +166,10 @@ NSString *userTimelineToken;
 
 
 - (void)dealloc {
-	[super dealloc];
-	
 	[engine closeAllConnections];
 	[engine release];
+	
+	[super dealloc];
 }
 
 @end

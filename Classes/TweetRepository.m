@@ -51,8 +51,8 @@ NSInteger usageCountUpdatedSort2(id msg1, id msg2, void *context) {
 	
 	// insert tweets into dictionary
 	NSEnumerator *enumerator = [weightedTweets objectEnumerator];
-	id tweet;
 	
+	TweetTemplate *tweet;
 	while (tweet = [enumerator nextObject]) {
 		[[self tweets] setObject:tweet forKey:[tweet tweet]];
 	}
@@ -72,15 +72,17 @@ NSInteger usageCountUpdatedSort2(id msg1, id msg2, void *context) {
 	}
 }
 
-- (NSMutableArray *)weighted {
-	NSArray *msgs = [[self tweets] allValues];
+- (void)persistTweets {
+	NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:[self weighted]];
 	
-	// sort by usage count and then by last updated at
-	NSArray *sortedArray = [msgs sortedArrayUsingFunction:usageCountUpdatedSort2 context:NULL];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:myEncodedObject forKey:@"tweets"];
+}
 
+// sort by usage count and then by last updated at
+- (NSMutableArray *)weighted {
+	NSArray *sortedArray = [[self.tweets allValues] sortedArrayUsingFunction:usageCountUpdatedSort2 context:NULL];
 	return [NSMutableArray arrayWithArray:sortedArray];
-	
-	// FIXME: is 'sortedArray' autoreleased?
 }
 
 @end
