@@ -330,7 +330,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>41E684F012102C1B0082293C</string>
+										<string>41E6854012102F1F0082293C</string>
 										<key>history</key>
 										<array>
 											<string>41AA9A8811EF55D40044FA6C</string>
@@ -362,7 +362,7 @@
 											<string>41E684A0121016C20082293C</string>
 											<string>41E684CB121029D30082293C</string>
 											<string>41E684DF12102B0A0082293C</string>
-											<string>41E684E012102B0A0082293C</string>
+											<string>41E6851212102CEE0082293C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -575,12 +575,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>41E684F112102C1B0082293C</string>
+		<string>41E6854112102F1F0082293C</string>
+		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>41E684D0121029D30082293C</string>
 		<string>41E684B6121026380082293C</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>41C5A31111EE48B200E634ED</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/theill/code/twpie/twpie.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -818,12 +819,14 @@
 							<key>Dock</key>
 							<array>
 								<dict>
+									<key>BecomeActive</key>
+									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>RootViewController.m</string>
+										<string>MessageViewController.m</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -844,8 +847,6 @@
 							<string>534pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -881,8 +882,8 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>4193174F120FEB7500C91F5E</string>
-				<string>41931750120FEB7500C91F5E</string>
+				<string>41E6850F12102CDA0082293C</string>
+				<string>41E6851012102CDA0082293C</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>

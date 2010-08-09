@@ -23,6 +23,8 @@
 	[message setText:[[self tweet] tweet]];
 	[message becomeFirstResponder];
 	
+	[self updateCharacterCount];
+	
 	self.navigationItem.title = @"New Tweet";
 
 	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
@@ -150,6 +152,12 @@
 
 	return YES;
 }
+
+//- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+//	if (event.type == UIEventSubtypeMotionShake) {
+//		[message setText:@""];
+//	}
+//}
 
 - (void)dealloc {
 	[engine closeAllConnections];

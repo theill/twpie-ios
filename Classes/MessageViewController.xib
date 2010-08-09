@@ -66,7 +66,7 @@
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 					</object>
-					<object class="IBUILabel" id="989162191">
+					<object class="IBUILabel" id="375006012">
 						<reference key="NSNextResponder" ref="406511434"/>
 						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{255, 165}, {45, 21}}</string>
@@ -160,14 +160,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="467776003"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">16</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">message</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="467776003"/>
@@ -186,7 +178,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">characterCount</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="989162191"/>
+						<reference key="destination" ref="375006012"/>
 					</object>
 					<int key="connectionID">26</int>
 				</object>
@@ -220,7 +212,7 @@
 							<reference ref="77588867"/>
 							<reference ref="583881033"/>
 							<reference ref="467776003"/>
-							<reference ref="989162191"/>
+							<reference ref="375006012"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -246,7 +238,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">25</int>
-						<reference key="object" ref="989162191"/>
+						<reference key="object" ref="375006012"/>
 						<reference key="parent" ref="406511434"/>
 					</object>
 				</object>
@@ -298,7 +290,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">26</int>
+			<int key="maxID">28</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
