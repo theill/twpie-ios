@@ -191,7 +191,7 @@
 #pragma mark -
 
 - (void)setupSampleTweets {
-	NSArray *tweets = [NSArray arrayWithObjects:@"@iquit 1", @"@having coffee", @"d twys groceries 46.5", @"@twye diet coke:40", @"d twye #180", nil];
+	NSArray *tweets = [NSArray arrayWithObjects:@"@iquit 1", @"going to sleep", @"at work", @"@having coffee", @"d twys groceries 46.5", @"@twye diet coke:40", @"d twye #180", nil];
 	
 	NSEnumerator *e = [tweets objectEnumerator];
 	

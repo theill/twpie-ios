@@ -11,7 +11,7 @@
 
 @implementation MessageViewController
 
-@synthesize delegate, tweet, activity;
+@synthesize delegate, tweet, activity, characterCount;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	[message setDelegate:self];
 	[message setText:[[self tweet] tweet]];
 	[message becomeFirstResponder];
 	
@@ -119,6 +120,25 @@
 	[alert release];
 	
 	[message becomeFirstResponder];
+}
+
+- (void)updateCharacterCount {
+	int charactersLeft = 140 - [[message text] length];
+	[characterCount setText:[NSString stringWithFormat:@"%d", charactersLeft]];
+	if (charactersLeft >= 0) {
+		[characterCount setTextColor:[UIColor darkGrayColor]];
+	}
+	else {
+		[characterCount setTextColor:[UIColor redColor]];
+	}
+
+}
+
+#pragma mark -
+#pragma mark UITextViewDelegate events
+
+- (void)textViewDidChange:(UITextView *)textView {
+	[self updateCharacterCount];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

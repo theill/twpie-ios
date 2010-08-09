@@ -13,18 +13,22 @@
 
 @protocol MessageViewControllerDelegate;
 
-@interface MessageViewController : UIViewController {
+@interface MessageViewController : UIViewController<UITextViewDelegate> {
 	id<MessageViewControllerDelegate> delegate;
 	TweetTemplate *tweet;
 	MGTwitterEngine *engine;
 
 	IBOutlet UITextView *message;
 	IBOutlet UIActivityIndicatorView *activity;
+	IBOutlet UILabel *characterCount;
 }
+
+- (void)updateCharacterCount;
 
 @property(nonatomic, assign) id delegate;
 @property (nonatomic, retain) TweetTemplate *tweet;
 @property (nonatomic, retain) UIActivityIndicatorView *activity;
+@property (nonatomic, retain) UILabel *characterCount;
 
 @end
 
