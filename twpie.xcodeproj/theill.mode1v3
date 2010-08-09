@@ -311,8 +311,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -330,7 +328,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>41C095F4120FE71300276FD3</string>
+										<string>41C0961E120FE9E800276FD3</string>
 										<key>history</key>
 										<array>
 											<string>41AA9A8811EF55D40044FA6C</string>
@@ -384,6 +382,8 @@
 							<string>658pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -575,7 +575,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>41C095F3120FE6F900276FD3</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>41C093B9120C3E5A00276FD3</string>
 		<string>41C093B7120C3AAB00276FD3</string>
@@ -606,7 +605,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>TweetRepository.m</string>
+								<string>MGTwitterEngine.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -615,7 +614,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {967, 335}}</string>
 								<key>RubberWindowFrame</key>
-								<string>533 324 967 617 0 0 1920 1178 </string>
+								<string>622 380 967 617 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -641,7 +640,7 @@
 								<key>Frame</key>
 								<string>{{0, 340}, {967, 236}}</string>
 								<key>RubberWindowFrame</key>
-								<string>533 324 967 617 0 0 1920 1178 </string>
+								<string>622 380 967 617 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXBuildResultsModule</string>
@@ -673,11 +672,11 @@
 			<key>WindowContentMinSize</key>
 			<string>486 300</string>
 			<key>WindowString</key>
-			<string>533 324 967 617 0 0 1920 1178 </string>
+			<string>622 380 967 617 0 0 1920 1178 </string>
 			<key>WindowToolGUID</key>
 			<string>41C5A31111EE48B200E634ED</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

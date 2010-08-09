@@ -38,7 +38,7 @@
 		return @"";
 	}
 	
-	if ([[parts objectAtIndex:0] isEqual:@"d"] && [parts count] > 1) {
+	if ([[[parts objectAtIndex:0] lowercaseString] isEqual:@"d"] && [parts count] > 1) {
 		return [NSString stringWithFormat:@"d %@", [parts objectAtIndex:1]];
 	}
 	
