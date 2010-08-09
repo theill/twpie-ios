@@ -56,13 +56,9 @@
 */
 
 - (void)settingsDone:(id)sender {
-	NSLog(@"Settings done!");
-	
 	[defaults setBool:FALSE forKey:@"setupcomplete"];
 	
-//	[self hideKeyboard];
 	[activity startAnimating];
-//	[saveButton setEnabled:NO];
 
 #if ENABLE_OAUTH
 	// get oauth token for this user
@@ -80,11 +76,9 @@
 #pragma mark Twitter authentication
 
 - (void)requestSucceeded:(NSString *)requestIdentifier{
-	NSLog(@"requestSucceeded : %@", requestIdentifier);
 	if ([requestIdentifier isEqual:userTimelineToken]) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Settings Saved" message:@"Your twitter details have been saved and tested" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[activity stopAnimating];
-//		[saveButton setEnabled:YES];
 		
 		[engine closeAllConnections];
 		
@@ -92,33 +86,20 @@
 		[alert show];
 		[alert release];
 		
-//		[self dismissModalViewControllerAnimated:YES];
 		[self.delegate configurationDidComplete:self];
 	}
 }
 
 - (void)requestFailed:(NSString *)requestIdentifier withError:(NSError *)error{
 	NSLog(@"requestFailed:%@withError%@", requestIdentifier, error );
-	if ([requestIdentifier isEqual:xauthRequestToken]) {
+	if ([requestIdentifier isEqual:xauthRequestToken] || [requestIdentifier isEqual:userTimelineToken]) {
 		[activity stopAnimating];
 		[introduction setText:@"Your username and password could not be verified. Try again!"];
-		[usernameTextField becomeFirstResponder];
-	} else if ([requestIdentifier isEqual:userTimelineToken]) {
-		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Your twitter details are either incorrect or Twitter is down." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-		[activity stopAnimating];
-//		[saveButton setEnabled:YES];
-		//[alert show];
-		//[alert release];
-		
-		[introduction setText:@"Your username and password could not be verified. Try again!"];
-		
 		[usernameTextField becomeFirstResponder];
 	}
 }
 
 - (void)accessTokenReceived:(OAToken *)token forRequest:(NSString *)connectionIdentifier {
-	NSLog(@"got access token %@", token);
-
 	if ([connectionIdentifier isEqual:xauthRequestToken]) {
 		[engine setAccessToken:token];
 		[token storeInUserDefaultsWithServiceProviderName:@"twpie" prefix:@""];

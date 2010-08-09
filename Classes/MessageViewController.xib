@@ -45,7 +45,7 @@
 					<object class="IBUITextView" id="467776003">
 						<reference key="NSNextResponder" ref="406511434"/>
 						<int key="NSvFlags">306</int>
-						<string key="NSFrameSize">{320, 200}</string>
+						<string key="NSFrameSize">{320, 194}</string>
 						<reference key="NSSuperview" ref="406511434"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -69,7 +69,7 @@
 					<object class="IBUIImageView" id="301424833">
 						<reference key="NSNextResponder" ref="406511434"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{0, 200}, {320, 216}}</string>
+						<string key="NSFrame">{{0, 194}, {320, 222}}</string>
 						<reference key="NSSuperview" ref="406511434"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

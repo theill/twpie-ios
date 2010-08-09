@@ -20,11 +20,34 @@
 	return self;
 }
 
+-(void)awakeFromNib {
+	UIImage *image = [UIImage imageNamed:@"updates-bg.png"];
+	UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+	imageView.contentMode = UIViewContentModeScaleToFill;
+	self.backgroundView = imageView;
+	[imageView release];
+	
+	UIView *selectedView = [[UIView alloc] init];
+	selectedView.backgroundColor = [UIColor colorWithRed:255/255.0 green:252/255.0 blue:215/255.0 alpha:0.40];
+	self.selectedBackgroundView = selectedView;
+	[selectedView release];
+	//		cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SelectedCellBackground.png"]] autorelease];
+	
+	//		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+	//		[cell setSelectedBackgroundView:<#(UIView *)#>
+	
+	//		UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"updates-bg.png"]];
+	//		[cell setBackgroundView:bgView];
+	
+	//        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+	
+}
+
+
 - (void)configure:(TweetTemplate *)t {
 	self.tweet = t;
 	
 	self.groupNameLabel.text = [tweet group];
-//	self.messageLabel.text = [[tweet text] stringByAppendingFormat:@" (%d)", [tweet usageCount]];
 	self.messageLabel.text = [tweet text];
 	
 	int offset = (self.groupNameLabel.text.length > 0) ? 8 : 0;
@@ -41,11 +64,11 @@
 }
 
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-	[super setSelected:selected animated:animated];
-	
-	// Configure the view for the selected state
-}
+//- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+//	[super setSelected:selected animated:animated];
+//	
+//	// Configure the view for the selected state
+//}
 
 
 - (void)dealloc {

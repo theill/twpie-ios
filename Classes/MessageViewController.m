@@ -23,6 +23,18 @@
 	[message becomeFirstResponder];
 	
 	self.navigationItem.title = @"New Tweet";
+
+	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
+	[engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
+	
+#if ENABLE_OAUTH
+	OAToken *token = [[OAToken alloc] initWithUserDefaultsUsingServiceProviderName:@"twpie" prefix:@""];
+	[engine setAccessToken:token];
+	[token release];
+#else
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
+#endif
 	
 //	UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(sendTweet)];
 //	self.navigationItem.rightBarButtonItem = sendButton;
@@ -80,26 +92,13 @@
 }
 
 - (void)sendTweet {
-	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
-	[engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
-	
-#if ENABLE_OAUTH
-	OAToken *token = [[[OAToken alloc] initWithUserDefaultsUsingServiceProviderName:@"twpie" prefix:@""] autorelease];
-	[engine setAccessToken:token];
-#else
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
-#endif
-	
 	NSLog(@"Sending %@ update message to twitter", [message	text]);
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	[activity startAnimating];
-	[engine sendUpdate:[message text]];	
+	[engine sendUpdate:[message text]];
 }
 
 - (void)requestSucceeded:(NSString *)connectionIdentifier {
-	NSLog(@"Got back response for identifier %@", connectionIdentifier);
-	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	[activity stopAnimating];
 	
@@ -114,10 +113,12 @@
 
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	[activity stopAnimating];
-	
-	
 
-	// we might pop up welcome screen here?
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tweet not sent" message:@"Unable to tweet at the moment. Twitter might be down. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+	
+	[message becomeFirstResponder];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -131,6 +132,9 @@
 }
 
 - (void)dealloc {
+	[engine closeAllConnections];
+	[engine release];
+	
 	[super dealloc];
 }
 

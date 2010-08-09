@@ -36,11 +36,9 @@
 //#endif
 	
 	if ([defaults boolForKey:@"setupcomplete"] == YES) {
-		NSLog(@"Setup complete, just continue with normal work");
+		// do nothing
 	}
 	else {
-		NSLog(@"We need to ask user for credentials");
-		
 		WelcomeViewController *welcome = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:nil];
 		//[welcome setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
 		[welcome setDelegate:self];
@@ -105,13 +103,11 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	NSLog(@"numberOfSectionsInTableView");
 	return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	NSLog(@"tableView:numberOfRowsInSection:");
 	return [[[self tweetRepository] tweets] count];
 }
 
@@ -123,19 +119,6 @@
 	TweetCell *cell = (TweetCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		cell = [[[NSBundle mainBundle] loadNibNamed:@"TweetCell" owner:self options:nil] objectAtIndex:0];
-		UIView *selectedView = [[UIView alloc] init];
-		selectedView.backgroundColor = [UIColor colorWithRed:255/255.0 green:252/255.0 blue:215/255.0 alpha:1.0];
-		cell.selectedBackgroundView = selectedView;
-		[selectedView release];
-//		cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SelectedCellBackground.png"]] autorelease];
-		
-//		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//		[cell setSelectedBackgroundView:<#(UIView *)#>
-
-		//		UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"updates-bg.png"]];
-		//		[cell setBackgroundView:bgView];
-		
-//        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 	}
 	
 	[self configureCell:cell atIndexPath:indexPath];
@@ -161,7 +144,6 @@
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSLog(@"tableView:commitEditingStyle:");
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		TweetTemplate *doomed = [[[self tweetRepository] weighted] objectAtIndex:[indexPath row]];
 		[[[self tweetRepository] tweets] removeObjectForKey:[doomed tweet]];
@@ -174,8 +156,6 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSLog(@"Clicked row at %d", indexPath.row);
-	
 	TweetTemplate *tweet = [[[self tweetRepository] weighted] objectAtIndex:indexPath.row];
 	[self editMessage:tweet];
 }
@@ -192,7 +172,6 @@
 #pragma mark Configuration events
 
 - (void)configurationDidComplete:(WelcomeViewController *)controller {
-	NSLog(@"Configuration completed and user is successfully authenticated with Twitter");
 	[self dismissModalViewControllerAnimated:YES];
 	
 	[self setupSampleTweets];
@@ -202,8 +181,6 @@
 #pragma mark Tweet events
 
 - (void)tweetSent:(UIViewController *)controller text:(NSString *)t {
-	NSLog(@"tweetSent");
-	
 	TweetTemplate *tt = [[TweetTemplate alloc] initWithTweet:t];
 	[[self tweetRepository] add:tt];
 	[tt release];
@@ -214,7 +191,7 @@
 #pragma mark -
 
 - (void)setupSampleTweets {
-	NSArray *tweets = [NSArray arrayWithObjects:@"d reporting w 85.4", @"@iquit 1", @"@having coffee", nil];
+	NSArray *tweets = [NSArray arrayWithObjects:@"@iquit 1", @"@having coffee", @"d twys groceries 46.5", @"@twye diet coke:40", @"d twye #180", nil];
 	
 	NSEnumerator *e = [tweets objectEnumerator];
 	
@@ -248,6 +225,5 @@
 	[tweetRepository release];
 	[super dealloc];
 }
-
 
 @end

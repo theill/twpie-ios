@@ -13,7 +13,7 @@
 
 @synthesize tweets;
 
-NSInteger usageCountUpdatedSort2(id msg1, id msg2, void *context) {
+NSInteger usageCountUpdatedSort(id msg1, id msg2, void *context) {
 	int usageCount1 = [msg1 usageCount];
 	int usageCount2 = [msg2 usageCount];
 	if (usageCount1 < usageCount2) {
@@ -81,8 +81,13 @@ NSInteger usageCountUpdatedSort2(id msg1, id msg2, void *context) {
 
 // sort by usage count and then by last updated at
 - (NSMutableArray *)weighted {
-	NSArray *sortedArray = [[self.tweets allValues] sortedArrayUsingFunction:usageCountUpdatedSort2 context:NULL];
+	NSArray *sortedArray = [[self.tweets allValues] sortedArrayUsingFunction:usageCountUpdatedSort context:NULL];
 	return [NSMutableArray arrayWithArray:sortedArray];
+}
+
+- (void)dealloc {
+	[tweets release];
+	[super dealloc];
 }
 
 @end

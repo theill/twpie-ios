@@ -38,7 +38,7 @@
 		return @"";
 	}
 	
-	if ([[parts objectAtIndex:0] hasPrefix:@"d"] && [parts count] > 1) {
+	if ([[parts objectAtIndex:0] isEqual:@"d"] && [parts count] > 1) {
 		return [NSString stringWithFormat:@"d %@", [parts objectAtIndex:1]];
 	}
 	
@@ -69,10 +69,11 @@
 
 
 - (void)dealloc {
-	[super dealloc];
 	[text release];
 	[group release];
 	[updatedAt release];
+	
+	[super dealloc];
 }
 
 #pragma mark -
