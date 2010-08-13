@@ -16,7 +16,7 @@
 @interface MessageViewController : UIViewController<UITextViewDelegate> {
 	id<MessageViewControllerDelegate> delegate;
 	TweetTemplate *tweet;
-	MGTwitterEngine *engine;
+	MGTwitterEngine *_engine;
 
 	IBOutlet UITextView *message;
 	IBOutlet UIActivityIndicatorView *activity;
@@ -24,6 +24,7 @@
 }
 
 - (void)updateCharacterCount;
+- (MGTwitterEngine *)engine;
 
 @property(nonatomic, assign) id delegate;
 @property (nonatomic, retain) TweetTemplate *tweet;

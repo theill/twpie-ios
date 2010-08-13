@@ -27,18 +27,6 @@
 	
 	self.navigationItem.title = @"New Tweet";
 
-	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
-	[engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
-	
-#if ENABLE_OAUTH
-	OAToken *token = [[OAToken alloc] initWithUserDefaultsUsingServiceProviderName:@"twpie" prefix:@""];
-	[engine setAccessToken:token];
-	[token release];
-#else
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
-#endif
-	
 //	UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(sendTweet)];
 //	self.navigationItem.rightBarButtonItem = sendButton;
 //	[sendButton release];
@@ -53,10 +41,30 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	// select 'text' part of tweet
-	if (self.tweet) {
+	// select 'text' part of tweet but only if it will not select entire message
+	if (self.tweet && ![message.text isEqualToString:self.tweet.text]) {
 		message.selectedRange = [message.text rangeOfString:self.tweet.text];
 	}
+}
+
+- (MGTwitterEngine *)engine {
+	if (_engine) {
+		return _engine;
+	}
+	
+	_engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
+	[_engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
+	
+#if ENABLE_OAUTH
+	OAToken *token = [[OAToken alloc] initWithUserDefaultsUsingServiceProviderName:@"twpie" prefix:@""];
+	[_engine setAccessToken:token];
+	[token release];
+#else
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[_engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
+#endif
+	
+	return _engine;
 }
 
 /*
@@ -91,14 +99,14 @@
 - (void)viewDidUnload {
 	// Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	// For example: self.myOutlet = nil;
-	[engine release]; engine = nil;
+	[_engine release]; _engine = nil;
 }
 
 - (void)sendTweet {
 	NSLog(@"Sending %@ update message to twitter", [message	text]);
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	[activity startAnimating];
-	[engine sendUpdate:[message text]];
+	[[self engine] sendUpdate:[message text]];
 }
 
 - (void)requestSucceeded:(NSString *)connectionIdentifier {
@@ -160,8 +168,11 @@
 //}
 
 - (void)dealloc {
-	[engine closeAllConnections];
-	[engine release];
+	if (_engine) {
+		[_engine closeAllConnections];
+		[_engine release];
+		_engine = nil;
+	}
 	
 	[super dealloc];
 }

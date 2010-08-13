@@ -13,12 +13,13 @@
 
 @interface WelcomeViewController : UIViewController {
 	id<WelcomeViewControllerDelegate> delegate;
+	MGTwitterEngine *engine;
+	
 	IBOutlet UITextField *usernameTextField;
 	IBOutlet UITextField *passwordTextField;
 	IBOutlet UITextView *introduction;
 	IBOutlet UIActivityIndicatorView *activity;
 
-	MGTwitterEngine *engine;
 @private
 	NSUserDefaults *defaults;
 	NSString *userTimelineToken;

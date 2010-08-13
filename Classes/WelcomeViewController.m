@@ -8,6 +8,7 @@
 
 #import "WelcomeViewController.h"
 #import "TwitterSettings.h"
+#import "TweetTemplate.h"
 
 @implementation WelcomeViewController
 
@@ -21,10 +22,6 @@
 	[super viewDidLoad];
 	
 	[usernameTextField becomeFirstResponder];
-	
-	defaults = [NSUserDefaults standardUserDefaults];
-	engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
-	[engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
 }
 
 /*
@@ -56,10 +53,18 @@
 */
 
 - (void)settingsDone:(id)sender {
-	[defaults setBool:FALSE forKey:@"setupcomplete"];
-	
 	[activity startAnimating];
-
+	
+	if (!defaults) {
+		defaults = [NSUserDefaults standardUserDefaults];
+		[defaults setBool:FALSE forKey:@"setupcomplete"];
+	}
+	
+	if (!engine) {
+		engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
+		[engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
+	}
+	
 #if ENABLE_OAUTH
 	// get oauth token for this user
 	xauthRequestToken = [engine getXAuthAccessTokenForUsername:usernameTextField.text password:passwordTextField.text];
@@ -77,12 +82,12 @@
 
 - (void)requestSucceeded:(NSString *)requestIdentifier{
 	if ([requestIdentifier isEqual:userTimelineToken]) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Settings Saved" message:@"Your twitter details have been saved and tested" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-		[activity stopAnimating];
-		
-		[engine closeAllConnections];
-		
 		[defaults setBool:TRUE forKey:@"setupcomplete"];
+		
+		[activity stopAnimating];
+		[engine closeAllConnections];
+
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Settings Saved" message:@"Your twitter details have been saved and tested" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
 		[alert release];
 		
@@ -94,6 +99,8 @@
 	NSLog(@"requestFailed:%@withError%@", requestIdentifier, error );
 	if ([requestIdentifier isEqual:xauthRequestToken] || [requestIdentifier isEqual:userTimelineToken]) {
 		[activity stopAnimating];
+		[engine closeAllConnections];
+		
 		[introduction setText:@"Your username and password could not be verified. Try again!"];
 		[usernameTextField becomeFirstResponder];
 	}
@@ -103,29 +110,62 @@
 	if ([connectionIdentifier isEqual:xauthRequestToken]) {
 		[engine setAccessToken:token];
 		[token storeInUserDefaultsWithServiceProviderName:@"twpie" prefix:@""];
-		
-		[activity stopAnimating];
-		[engine closeAllConnections];
-		
 		[defaults setBool:TRUE forKey:@"setupcomplete"];
-		[self.delegate configurationDidComplete:self];
+		
+//		NSString *directMessagesToken;
+//		directMessagesToken = [engine getDirectMessagesSinceID:0 withMaximumID:0 startingAtPage:0 count:200];
+		userTimelineToken = [engine getUserTimelineFor:usernameTextField.text sinceID:0 startingAtPage:0 count:200];
+		
+//		[activity stopAnimating];
+//		[engine closeAllConnections];
+//		
+//		[self.delegate configurationDidComplete:self];
 	}
 }
 
+- (void)directMessagesReceived:(NSArray *)messages forRequest:(NSString *)connectionIdentifier {
+	NSLog(@"directMessagesReceived: %d and %@", [messages count], connectionIdentifier);
+}
+
 - (void)statusesReceived:(NSArray *)statuses forRequest:(NSString *)connectionIdentifier {
-	// we don't need to use this information yet - in a future release it could make sense
-	// to analyse a bulk of messsages and try to recognize any patterns
-//	NSLog(@"statusesReceived: %d and %@", [statuses count], connectionIdentifier);
-//	
-//	if ([statuses count] > 0) {
-//		NSEnumerator *enumerator = [statuses objectEnumerator];
-//		NSDictionary *dict;
-//		
-//		while (dict = [enumerator nextObject]) {
-//			NSString *txt = [dict objectForKey:@"text"];
-//			NSLog(@"we got %@", txt);
-//		}		
-//	}
+	// analyse recent messsages and try to recognize any patterns
+	NSLog(@"statusesReceived: %d and %@", [statuses count], connectionIdentifier);
+	
+	if ([connectionIdentifier isEqual:userTimelineToken]) {
+		// read all status messages
+		// read all direct messages
+		// count number of occurances of each message
+		// filter out messages which has been sent only once
+		
+		if ([statuses count] > 0) {
+			NSEnumerator *enumerator = [statuses objectEnumerator];
+			NSDictionary *dict;
+			
+//			while (dict = [enumerator nextObject]) {
+//				NSString *txt = [dict objectForKey:@"text"];
+//				NSLog(@"we got %@", txt);
+//			}
+			
+			NSMutableDictionary *tweets = [[NSMutableDictionary alloc] init];
+			while (dict = [enumerator nextObject]) {
+				NSString *txt = [dict objectForKey:@"text"];
+				NSLog(@"we got %@", txt);
+				
+				TweetTemplate *tweet = [[TweetTemplate alloc] initWithTweet:txt];
+				[tweets setObject:tweet forKey:[tweet tweet]];
+				[tweet release];
+			}
+			
+			NSLog(@"in total we now have %d tweets", [tweets count]);
+			
+			[tweets release];
+		}
+	}
+	
+	[activity stopAnimating];
+	[engine closeAllConnections];
+	
+	[self.delegate configurationDidComplete:self];
 }
 
 #pragma mark -
@@ -146,8 +186,11 @@
 
 
 - (void)dealloc {
-	[engine closeAllConnections];
-	[engine release];
+	if (engine) {
+		[engine closeAllConnections];
+		[engine release];
+		engine = nil;
+	}
 	
 	[super dealloc];
 }
