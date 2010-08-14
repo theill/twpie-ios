@@ -22,7 +22,6 @@
 }
 
 - (id)initWithTweet:(NSString *)tweet {
-	NSLog(@"Initializing tweet with %@", tweet);
 	return [self initWithText:[self extractTextFrom:tweet] group:[self extractGroupFrom:tweet]];
 }
 

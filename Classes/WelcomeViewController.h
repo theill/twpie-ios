@@ -19,6 +19,7 @@
 	IBOutlet UITextField *passwordTextField;
 	IBOutlet UITextView *introduction;
 	IBOutlet UIActivityIndicatorView *activity;
+	IBOutlet UILabel *status;
 
 @private
 	NSUserDefaults *defaults;
@@ -37,5 +38,5 @@
 @end
 
 @protocol WelcomeViewControllerDelegate
-- (void)configurationDidComplete:(WelcomeViewController *)controller;
+- (void)configurationDidComplete:(WelcomeViewController *)controller with:(NSMutableDictionary *)tweets;
 @end

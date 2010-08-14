@@ -171,10 +171,21 @@
 #pragma mark -
 #pragma mark Configuration events
 
-- (void)configurationDidComplete:(WelcomeViewController *)controller {
+- (void)configurationDidComplete:(WelcomeViewController *)controller with:(NSMutableDictionary *)tweets {
 	[self dismissModalViewControllerAnimated:YES];
 	
-	[self setupSampleTweets];
+	NSEnumerator *tweetEnumerator = [tweets objectEnumerator];
+	
+	TweetTemplate *tweet;
+	while (tweet = [tweetEnumerator nextObject]) {
+		[[self tweetRepository] add:tweet];
+	}
+	
+	if ([self.tweetRepository.tweets count] == 0) {
+		// setup a couple of sample tweets in case no previously sent tweets
+		// was received and configured for this user
+		[self setupSampleTweets];
+	}
 }
 
 #pragma mark -

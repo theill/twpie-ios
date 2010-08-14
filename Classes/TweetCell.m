@@ -27,7 +27,6 @@
 	self.backgroundView = imageView;
 	[imageView release];
 	
-	NSLog(@"awakeFromNib (tweetcell)");
 	UIView *selectedView = [[UIView alloc] init];
 	selectedView.backgroundColor = [UIColor colorWithRed:255/255.0 green:252/255.0 blue:215/255.0 alpha:0.40];
 	self.selectedBackgroundView = selectedView;
