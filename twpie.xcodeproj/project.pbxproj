@@ -16,13 +16,17 @@
 		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		4134D5241281C4C0006EDA17 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 4134D5231281C4C0006EDA17 /* iTunesArtwork.png */; };
+		4134D5271281CB03006EDA17 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 4134D5261281CB03006EDA17 /* Icon-72.png */; };
+		4134D5291281CB0C006EDA17 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 4134D5281281CB0C006EDA17 /* Icon-Small.png */; };
+		4134D52F1281CBF9006EDA17 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4134D52E1281CBF9006EDA17 /* Icon@2x.png */; };
 		417F7D5E11F060BB0091993B /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 417F7D5D11F060BB0091993B /* TweetCell.m */; };
 		419257D31206E8A800629AD8 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419257D21206E8A800629AD8 /* TweetCell.xib */; };
 		41925AD2120854CA00629AD8 /* TweetRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 41925AD1120854CA00629AD8 /* TweetRepository.m */; };
 		41AA9AB411EF7C2D0044FA6C /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AA9AB211EF7C2D0044FA6C /* WelcomeViewController.m */; };
 		41AA9AB511EF7C2D0044FA6C /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41AA9AB311EF7C2D0044FA6C /* WelcomeViewController.xib */; };
 		41AA9B1811EF86D00044FA6C /* bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 41AA9B1711EF86D00044FA6C /* bird.png */; };
-		41AA9B3C11EF8E970044FA6C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 41AA9B3B11EF8E970044FA6C /* icon.png */; };
+		41AA9B3C11EF8E970044FA6C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 41AA9B3B11EF8E970044FA6C /* Icon.png */; };
 		41AA9CAE11EFAF980044FA6C /* TweetTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AA9CAD11EFAF980044FA6C /* TweetTemplate.m */; };
 		41C0945B120F44D600276FD3 /* updates-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 41C0945A120F44D600276FD3 /* updates-bg.png */; };
 		41C5A38911EE4E6B00E634ED /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C5A38711EE4E6B00E634ED /* MessageViewController.m */; };
@@ -85,6 +89,10 @@
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4134D5231281C4C0006EDA17 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		4134D5261281CB03006EDA17 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		4134D5281281CB0C006EDA17 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		4134D52E1281CBF9006EDA17 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		417F7D5C11F060BB0091993B /* TweetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetCell.h; sourceTree = "<group>"; };
 		417F7D5D11F060BB0091993B /* TweetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 		419257D21206E8A800629AD8 /* TweetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
@@ -94,7 +102,7 @@
 		41AA9AB211EF7C2D0044FA6C /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		41AA9AB311EF7C2D0044FA6C /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WelcomeViewController.xib; path = Classes/WelcomeViewController.xib; sourceTree = "<group>"; };
 		41AA9B1711EF86D00044FA6C /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bird.png; sourceTree = "<group>"; };
-		41AA9B3B11EF8E970044FA6C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		41AA9B3B11EF8E970044FA6C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		41AA9CAC11EFAF980044FA6C /* TweetTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetTemplate.h; sourceTree = "<group>"; };
 		41AA9CAD11EFAF980044FA6C /* TweetTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetTemplate.m; sourceTree = "<group>"; };
 		41C0945A120F44D600276FD3 /* updates-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "updates-bg.png"; sourceTree = "<group>"; };
@@ -259,13 +267,17 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4134D5231281C4C0006EDA17 /* iTunesArtwork.png */,
+				4134D52E1281CBF9006EDA17 /* Icon@2x.png */,
+				4134D5261281CB03006EDA17 /* Icon-72.png */,
+				4134D5281281CB0C006EDA17 /* Icon-Small.png */,
 				41FF784A12099412009139E9 /* messages-bg.png */,
 				41C0945A120F44D600276FD3 /* updates-bg.png */,
 				41FF770112096B9D009139E9 /* login-head-bg.png */,
 				41FF784712099379009139E9 /* twitter-bird-writing.png */,
 				41FF76EC120968AE009139E9 /* login-bg.png */,
 				41AA9B1711EF86D00044FA6C /* bird.png */,
-				41AA9B3B11EF8E970044FA6C /* icon.png */,
+				41AA9B3B11EF8E970044FA6C /* Icon.png */,
 				419257D21206E8A800629AD8 /* TweetCell.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				2899E55F0DE3E45000AC0155 /* RootViewController.xib */,
@@ -433,6 +445,7 @@
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "twpie" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -460,7 +473,7 @@
 				41C5A38A11EE4E6B00E634ED /* MessageViewController.xib in Resources */,
 				41AA9AB511EF7C2D0044FA6C /* WelcomeViewController.xib in Resources */,
 				41AA9B1811EF86D00044FA6C /* bird.png in Resources */,
-				41AA9B3C11EF8E970044FA6C /* icon.png in Resources */,
+				41AA9B3C11EF8E970044FA6C /* Icon.png in Resources */,
 				419257D31206E8A800629AD8 /* TweetCell.xib in Resources */,
 				41FF76ED120968AE009139E9 /* login-bg.png in Resources */,
 				41FF770212096B9D009139E9 /* login-head-bg.png in Resources */,
@@ -471,6 +484,10 @@
 				41FF7974120A0C55009139E9 /* README in Resources */,
 				41FF7CA3120AFEB9009139E9 /* READ.ME in Resources */,
 				41C0945B120F44D600276FD3 /* updates-bg.png in Resources */,
+				4134D5241281C4C0006EDA17 /* iTunesArtwork.png in Resources */,
+				4134D5271281CB03006EDA17 /* Icon-72.png in Resources */,
+				4134D5291281CB0C006EDA17 /* Icon-Small.png in Resources */,
+				4134D52F1281CBF9006EDA17 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,12 +579,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peter Theill (8R67ELHUP2)";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"ENABLE_OAUTH=1",
-					"USE_LIBXML=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "USE_LIBXML=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -575,8 +589,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.0;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "251939F8-1062-403E-9EFB-125FB626E344";
+				SDKROOT = iphoneos4.2;
 			};
 			name = Distribution;
 		};
@@ -601,7 +615,6 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
-					"ENABLE_OAUTH=1",
 					"USE_LIBXML=1",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
@@ -610,7 +623,7 @@
 				HEADER_SEARCH_PATHS = "$SDKROOT/usr/include/libxml2/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos4.2;
 			};
 			name = Debug;
 		};
@@ -620,10 +633,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"ENABLE_OAUTH=1",
-					"USE_LIBXML=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "USE_LIBXML=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -631,7 +641,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos4.2;
 			};
 			name = Release;
 		};

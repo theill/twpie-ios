@@ -4587,7 +4587,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUIActivityIndicatorView" id="1010697438">
 						<reference key="NSNextResponder" ref="310431002"/>
 						<int key="NSvFlags">-2147483359</int>
-						<string key="NSFrame">{{20, 329}, {20, 20}}</string>
+						<string key="NSFrame">{{150, 270}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="310431002"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -4595,7 +4595,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUILabel" id="114735914">
 						<reference key="NSNextResponder" ref="310431002"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{48, 328}, {252, 21}}</string>
+						<string key="NSFrame">{{20, 298}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="310431002"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -4608,14 +4608,17 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<double key="NSSize">13</double>
 							<int key="NSfFlags">16</int>
 						</object>
-						<object class="NSColor" key="IBUITextColor">
+						<reference key="IBUITextColor" ref="1010139279"/>
+						<nil key="IBUIHighlightedColor"/>
+						<object class="NSColor" key="IBUIShadowColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
 						</object>
-						<nil key="IBUIHighlightedColor"/>
+						<string key="IBUIShadowOffset">{1, 1}</string>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIImageView" id="841843425">
 						<reference key="NSNextResponder" ref="310431002"/>
@@ -4847,7 +4850,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">26</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

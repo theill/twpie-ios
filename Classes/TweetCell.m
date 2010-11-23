@@ -11,7 +11,7 @@
 @implementation TweetCell
 
 @synthesize tweet;
-@synthesize groupNameLabel, messageLabel;
+@synthesize groupNameLabel, messageLabel, countLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
@@ -49,6 +49,7 @@
 	
 	self.groupNameLabel.text = [tweet group];
 	self.messageLabel.text = [tweet text];
+	self.countLabel.text = [NSString stringWithFormat:@"%d", [tweet usageCount]];
 	
 	int offset = (self.groupNameLabel.text.length > 0) ? 8 : 0;
 	

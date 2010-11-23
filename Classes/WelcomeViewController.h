@@ -23,11 +23,13 @@
 
 @private
 	NSUserDefaults *defaults;
-	NSString *userTimelineToken;
-	NSString *xauthRequestToken;
+	NSMutableDictionary *_tweets;
+	NSString *userTimelineToken, *xauthRequestToken, *sentDirectMessagesToken;
 }
 
 - (IBAction)settingsDone:(id)sender;
+- (void)populate:(NSMutableDictionary *)tweets with:(NSArray *)msgs;
+- (NSMutableDictionary *)tweets;
 
 @property(nonatomic, assign) id delegate;
 @property(nonatomic, retain) UITextField *usernameTextField;

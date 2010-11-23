@@ -43,7 +43,13 @@
 	
 	// select 'text' part of tweet but only if it will not select entire message
 	if (self.tweet && ![message.text isEqualToString:self.tweet.text]) {
-		message.selectedRange = [message.text rangeOfString:self.tweet.text];
+		NSRange positionOfHash = [self.tweet.text rangeOfString:@"#"];
+		if (positionOfHash.location != NSNotFound) {
+			message.selectedRange = [message.text rangeOfString:[self.tweet.text substringToIndex:positionOfHash.location]];
+		}
+		else {
+			message.selectedRange = [message.text rangeOfString:self.tweet.text];
+		}
 	}
 }
 
@@ -55,14 +61,9 @@
 	_engine = [[MGTwitterEngine twitterEngineWithDelegate:self] retain];
 	[_engine setConsumerKey:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
 	
-#if ENABLE_OAUTH
 	OAToken *token = [[OAToken alloc] initWithUserDefaultsUsingServiceProviderName:@"twpie" prefix:@""];
 	[_engine setAccessToken:token];
 	[token release];
-#else
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[_engine setUsername:[defaults stringForKey:@"username"] password:[defaults stringForKey:@"password"]];
-#endif
 	
 	return _engine;
 }

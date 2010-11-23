@@ -22,6 +22,8 @@
 	[super viewDidLoad];
 	
 	[usernameTextField becomeFirstResponder];
+	
+	xauthRequestToken = userTimelineToken = sentDirectMessagesToken = @"";
 }
 
 /*
@@ -76,28 +78,23 @@
 
 - (void)requestSucceeded:(NSString *)requestIdentifier{
 	NSLog(@"requestSucceeded:%@", requestIdentifier);
-//	if ([requestIdentifier isEqual:userTimelineToken]) {
-//		[defaults setBool:TRUE forKey:@"setupcomplete"];
-//		
-//		[activity stopAnimating];
-//		[engine closeAllConnections];
-//
-//		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Settings Saved" message:@"Your twitter details have been saved and tested" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//		[alert show];
-//		[alert release];
-//		
-//		[self.delegate configurationDidComplete:self];
-//	}
 }
 
 - (void)requestFailed:(NSString *)requestIdentifier withError:(NSError *)error{
 	NSLog(@"requestFailed:%@ withError%@", requestIdentifier, error);
-	if ([requestIdentifier isEqual:xauthRequestToken] || [requestIdentifier isEqual:userTimelineToken]) {
+	if ([requestIdentifier isEqualToString:xauthRequestToken]) {
 		[activity stopAnimating];
 		[engine closeAllConnections];
 		
 		[introduction setText:@"Your username and password could not be verified. Try again!"];
 		[usernameTextField becomeFirstResponder];
+	}
+	else if ([requestIdentifier isEqualToString:userTimelineToken]) {
+		// too bad, we were not able to fetch previously sent tweets so we just close
+		[activity stopAnimating];
+		[engine closeAllConnections];
+		
+		[self.delegate configurationDidComplete:self with:nil];
 	}
 }
 
@@ -109,19 +106,21 @@
 		
 		[status setText:@"Retrieving previously sent tweets"];
 		
-//		NSString *directMessagesToken;
-//		directMessagesToken = [engine getDirectMessagesSinceID:0 withMaximumID:0 startingAtPage:0 count:200];
 		userTimelineToken = [engine getUserTimelineFor:usernameTextField.text sinceID:0 startingAtPage:0 count:200];
-		
-//		[activity stopAnimating];
-//		[engine closeAllConnections];
-//		
-//		[self.delegate configurationDidComplete:self];
 	}
 }
 
 - (void)directMessagesReceived:(NSArray *)messages forRequest:(NSString *)connectionIdentifier {
 	NSLog(@"directMessagesReceived: %d and %@", [messages count], connectionIdentifier);
+
+	if ([connectionIdentifier isEqual:sentDirectMessagesToken]) {
+		[self populate:self.tweets with:messages];
+		
+		[activity stopAnimating];
+		[engine closeAllConnections];
+
+		[self.delegate configurationDidComplete:self with:self.tweets];
+	}
 }
 
 - (void)statusesReceived:(NSArray *)statuses forRequest:(NSString *)connectionIdentifier {
@@ -133,49 +132,61 @@
 		// read all direct messages
 		// count number of occurances of each message
 		// filter out messages which has been sent only once
+		
+		[self populate:self.tweets with:statuses];
 
-		NSMutableDictionary *tweets = [[NSMutableDictionary alloc] init];
+		[status setText:@"Reading direct messages previously sent"];
+		sentDirectMessagesToken = [engine getSentDirectMessagesSinceID:0 withMaximumID:0 startingAtPage:0 count:200];
 
-		if ([statuses count] > 0) {
-			NSEnumerator *enumerator = [statuses objectEnumerator];
-			NSDictionary *dict;
+//		[activity stopAnimating];
+//		[engine closeAllConnections];
+		
+//		[self.delegate configurationDidComplete:self with:tweets];
+	}
+}
+
+- (void)populate:(NSMutableDictionary *)tweets with:(NSArray *)msgs {
+	if ([msgs count] > 0) {
+		NSEnumerator *enumerator = [msgs objectEnumerator];
+		NSDictionary *dict;
+		
+		while (dict = [enumerator nextObject]) {
+			NSString *txt = [dict objectForKey:@"text"];
+			NSDate *createdAt = [dict objectForKey:@"created_at"];
 			
-			while (dict = [enumerator nextObject]) {
-				NSString *txt = [dict objectForKey:@"text"];
-				NSDate *createdAt = [dict objectForKey:@"created_at"];
-
-				TweetTemplate *x = [[TweetTemplate alloc] initWithTweet:txt];
-				[x setUpdatedAt:createdAt];
-
-				TweetTemplate *tweet = [tweets objectForKey:[x tweet]];
-				if (tweet) {
-					[tweet increase];
-				}
-				else {
-					[tweets setObject:x forKey:[x tweet]];
-				}
-				
-				[x release];
+			TweetTemplate *x = [[TweetTemplate alloc] initWithTweet:txt];
+			[x setUpdatedAt:createdAt];
+			
+			TweetTemplate *tweet = [tweets objectForKey:[x tweet]];
+			if (tweet) {
+				[tweet increase];
+			}
+			else {
+				[tweets setObject:x forKey:[x tweet]];
 			}
 			
-			NSMutableArray *doomedKeys = [[NSMutableArray alloc] init];
-			enumerator = [tweets objectEnumerator];
-			TweetTemplate *t;
-			while (t = [enumerator nextObject]) {
-				if (t.usageCount < 3) {
-					[doomedKeys addObject:[t tweet]];
-				}
-			}
-			[tweets removeObjectsForKeys:doomedKeys];
-			[doomedKeys release];
+			[x release];
 		}
 		
-		[activity stopAnimating];
-		[engine closeAllConnections];
-		
-		[self.delegate configurationDidComplete:self with:tweets];
-		[tweets release];
+		NSMutableArray *doomedKeys = [[NSMutableArray alloc] init];
+		enumerator = [tweets objectEnumerator];
+		TweetTemplate *t;
+		while (t = [enumerator nextObject]) {
+			if (t.usageCount < 3) {
+				[doomedKeys addObject:[t tweet]];
+			}
+		}
+		[tweets removeObjectsForKeys:doomedKeys];
+		[doomedKeys release];
 	}
+}
+
+- (NSMutableDictionary *)tweets {
+	if (!_tweets) {
+		_tweets = [[NSMutableDictionary alloc] init];
+	}
+	
+	return _tweets;
 }
 
 #pragma mark -
@@ -192,15 +203,21 @@
 	// Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	// For example: self.myOutlet = nil;
 	[engine release]; engine = nil;
+	[_tweets release]; _tweets = nil;
+	
+	[xauthRequestToken release]; xauthRequestToken = nil;
+	[userTimelineToken release]; userTimelineToken = nil;
+	[sentDirectMessagesToken release]; sentDirectMessagesToken = nil;
 }
 
 
 - (void)dealloc {
 	if (engine) {
 		[engine closeAllConnections];
-		[engine release];
-		engine = nil;
+		[engine release]; engine = nil;
 	}
+	
+	[_tweets release]; _tweets = nil;
 	
 	[super dealloc];
 }

@@ -174,11 +174,13 @@
 - (void)configurationDidComplete:(WelcomeViewController *)controller with:(NSMutableDictionary *)tweets {
 	[self dismissModalViewControllerAnimated:YES];
 	
-	NSEnumerator *tweetEnumerator = [tweets objectEnumerator];
-	
-	TweetTemplate *tweet;
-	while (tweet = [tweetEnumerator nextObject]) {
-		[[self tweetRepository] add:tweet];
+	if (tweets) {
+		NSEnumerator *tweetEnumerator = [tweets objectEnumerator];
+		
+		TweetTemplate *tweet;
+		while (tweet = [tweetEnumerator nextObject]) {
+			[[self tweetRepository] add:tweet];
+		}
 	}
 	
 	if ([self.tweetRepository.tweets count] == 0) {
@@ -202,7 +204,7 @@
 #pragma mark -
 
 - (void)setupSampleTweets {
-	NSArray *tweets = [NSArray arrayWithObjects:@"@iquit 1", @"going to sleep", @"at work", @"@having coffee", @"d twys groceries 46.5", @"@twye diet coke:40", @"d twye #180", nil];
+	NSArray *tweets = [NSArray arrayWithObjects:@"@iquit 1", @"going to sleep", @"at work", @"d twye #220", @"@having cup of tea", @"@having coffee at local cafe", @"@having sandwich for #lunch", @"@having bacon and eggs for #breakfast", @"coffee #twye", @"banana #twye", @"apple #twye", @"Just installed #twpie", nil];
 	
 	NSEnumerator *e = [tweets objectEnumerator];
 	
@@ -233,7 +235,7 @@
 
 
 - (void)dealloc {
-	[tweetRepository release];
+	[tweetRepository release]; tweetRepository = nil;
 	[super dealloc];
 }
 
