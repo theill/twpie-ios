@@ -28,13 +28,7 @@
 	tweetRepository = [[TweetRepository alloc] init];
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//#if DEBUG
-//	[defaults setBool:TRUE forKey:@"setupcomplete"];
-//	[defaults setObject:@"theilltest" forKey:@"username"];
-//	[defaults setObject:@"653976" forKey:@"password"];
-//	[self setupSampleTweets];
-//#endif
-	
+
 	if ([defaults boolForKey:@"setupcomplete"] == YES) {
 		// do nothing
 	}
